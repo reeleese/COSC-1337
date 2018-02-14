@@ -151,9 +151,9 @@ Good luck!
 1 * 15 = -1
 
 Your Report Card:
-Multiplication:57% of 7 question(s) correct. More study is recommended.
-Division:83% of 6 question(s) correct. More study is recommended.
-Addition:75% of 4 question(s) correct. More study is recommended.
-Subtraction:80% of 5 question(s) correct. More study is recommended.
+Multiplication: 57% of 7 question(s) correct. More study is recommended.
+Division:       83% of 6 question(s) correct. More study is recommended.
+Addition:       75% of 4 question(s) correct. More study is recommended.
+Subtraction:    80% of 5 question(s) correct. More study is recommended.
 Goodbye!
 */
