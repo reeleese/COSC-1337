@@ -16,10 +16,6 @@ int main(){
        << "To stop the tutor, give any negative number as an answer." << endl
        << "Good luck!" << endl;
 
-  //Some variables
-  int user_answer;
-  int answer;
-
   //Statistics
   int qs_asked[4] = {0, 0, 0, 0};
   int qs_correct[4] = {0, 0, 0, 0};
@@ -32,12 +28,13 @@ int main(){
   while (!done){ 
     //Generate question type (*, /, +, or -)
     int question_type = rand() % 4;
-
+    
+    //Problem variables
     int a = 0;
     int b = 0;
     int c = 0;
     
-    //Generate multiplication and division
+    //Generate multiplication and division values
     if (question_type == 0 || question_type == 1){
       //Generate values
       c = rand() % 100 + 1;
@@ -54,6 +51,11 @@ int main(){
       b = c - a;
     }
 
+    //Answer variables
+    int user_answer = 0;
+    int answer = 0;
+    
+    //Print question and record user_answer
     switch(question_type) {
       case 0 :
         printf("%d * %d = ", a, b);
@@ -80,19 +82,20 @@ int main(){
 	break;
     }
 
-    //Quit tutor
+    //Update accumulators
     if (user_answer >= 0){
       ++qs_asked[question_type];
       if (user_answer == answer)
 	++qs_correct[question_type];
     }
 
-    //Update accumulators
+    //Quit
     else {
       done = true;
       
     }
   }
+
   //Calculate score
   cout << "\nFinal Grades:" << endl;
   printf("Multiplication:\t%d/%d correct.\n", qs_correct[0], qs_asked[0]);
