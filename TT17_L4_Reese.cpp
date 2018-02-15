@@ -18,15 +18,17 @@ int main() {
   //Loop
   bool done = false;
   while (!done) {
-    //Menu
+    //Get material
     cout << "a)ir, w)water, s)teel or  q)uit" << endl;
     cout << "Option: ";
-
-    //Get option
-
     char tmp;
     cin >> tmp;
     Material option = static_cast<Material>(tmp);
+
+    //Get thickness
+    cout << "How thick is the matarial (in feet): ";
+    double thickness;
+    cin >> thickness;
 
     //Process option
     switch (option) {
