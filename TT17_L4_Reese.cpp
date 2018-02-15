@@ -1,18 +1,39 @@
+
 // Author: Lee Reese;  Course: COSC 1337 Spring 2018 TT17;  Instructor: Thayer
 // Lab: 4  Purpose: 
 
 /*
 TODO:
 -Add purpose
--enum for options
--create data file
--cin to option somehow
+-Read file contents
 */
 
 #include  <iostream>
+#include <fstream>
+#include <vector>
 using namespace std;
 
 int main() {
+  //Read in file
+  string filename = "lab4_info.txt";
+  ifstream speeds{filename};
+
+  vector<string> file_contents;
+  if (speeds) {
+    string item = "notAnInt";
+    while (speeds >> item) {
+      file_contents.push_back(item);
+    }
+  }
+
+  vector<string> options;
+  for (int i = 0; i < file_contents.size(); i += 2) {
+    options.push_back(file_contents[i]);
+    
+  }
+
+  /*
+  //Material enum
   enum Material {air='a', water='w', steel='s', quit='q'};
   
   //Loop
@@ -45,9 +66,10 @@ int main() {
       cout << "quit.";
       break;
     default :
-      cout << "Invalid input";
+      cout << "Invalid input.";
       break;
     }
   }
+  */
   return 0;
 }
