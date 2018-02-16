@@ -51,6 +51,7 @@ int main() {
       menu = menu + tmp + ", ";
     }
   }
+  //Add the quit option to the menu
   menu += "or q)uit: ";
   //Loop
   bool done = false;
@@ -61,16 +62,21 @@ int main() {
     cin >> option;
     option = tolower(option);
     
-    //Prompt for thickness
-    cout << "How thick is the material (in feet): ";
-    double thickness;
-    cin >> thickness;
+    //Check for quit
+    if (option == 'q')
+      done = true;
+    
+    else {
+      //Prompt for thickness
+      cout << "How thick is the material (in feet): ";
+      double thickness;
+      cin >> thickness;
 
-    //Output displacement of sound wave
-    double displacement = options[option] * thickness;
-    cout << "The sound will travel ";
-    printf("%0.4f feet\n", displacement);
-
+      //Output displacement of sound wave
+      double displacement = options[option] * thickness;
+      cout << "The sound will travel ";
+      printf("%0.4f feet\n", displacement);
+    }
   }
   return 0;
 }
