@@ -1,6 +1,6 @@
 
 // Author: Lee Reese;  Course: COSC 1337 Spring 2018 TT17;  Instructor: Thayer
-// Lab: 4  Purpose: 
+// Lab: 4  Purpose: Read speed of sounds in materials from a file and allow user to calculate the time for sound to travel a given distance in different materials
 
 /*
 TODO:
