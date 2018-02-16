@@ -11,6 +11,7 @@ TODO:
 #include  <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 using namespace std;
 
 int main() {
@@ -25,12 +26,19 @@ int main() {
       file_contents.push_back(item);
     }
   }
-
-  vector<string> options;
-  for (int i = 0; i < file_contents.size(); i += 2) {
-    options.push_back(file_contents[i]);
-    
+  
+  //Print menu
+  map<char, int> options;
+  for (int i = 0; i < file_contents.size(); i += 2){
+    cout << file_contents[i] << "\t" << file_contents[i+1] << endl;
+    if (i > 1) {
+      char key = tolower(file_contents[i][0]);
+      int value = atoi(file_contents[i+1].c_str());
+      options[key] = value;
+    }
   }
+  cout << options['s'];
+    
 
   /*
   //Material enum
