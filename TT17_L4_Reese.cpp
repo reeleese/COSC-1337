@@ -29,6 +29,7 @@ int main() {
       file_contents.push_back(item);
     }
   }
+  my_file.close();
   
   //Print menu, map materials to their respective speeds
   string menu = "Select a material: ";
