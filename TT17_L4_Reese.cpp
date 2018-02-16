@@ -61,16 +61,18 @@ int main() {
     cin >> option;
     option = tolower(option);
     
+    while (materials[option] == 0) {
+      cout <<"Invalid material option.\n";
+      cout << menu;
+      cin >> option;
+      option = tolower(option);
+    }
     //Check for quit
     if (option == 'q') {
       cout << "Goodbye.";
       done = true;
     }
-    
-    //Material input validation
-    else if (materials[option] == 0)
-      cout << "Invalid material option.\n";
-    
+
     else {
       //Get displacement
       cout << "How thick is the material (in feet): ";
