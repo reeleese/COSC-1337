@@ -17,11 +17,9 @@ TODO:
 using namespace std;
 
 int main() {
-  //Read in file
+  //Read file into a vector file_contents
   string filename = "lab4_info.txt";
   ifstream my_file{filename};
-
-  //Read file into a vector file_contents
   vector<string> file_contents;
   if (my_file) {
     string item = "notAnInt";
@@ -51,6 +49,7 @@ int main() {
   }
   //Add the quit option to the menu
   menu += "or q)uit: ";
+
   //Loop
   bool done = false;
   while (!done) {
