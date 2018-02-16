@@ -18,7 +18,7 @@ using namespace std;
 
 int main() {
   //Read file into a vector file_contents
-  string filename = "lab4_info.txt";
+  string filename = "TT17_L4_Reese_In.txt";
   ifstream my_file{filename};
   vector<string> file_contents;
   if (my_file) {
