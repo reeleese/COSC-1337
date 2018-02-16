@@ -31,13 +31,10 @@ int main() {
   }
   my_file.close();
   
-  //Print menu, map materials to their respective speeds
+  //Create menu, map materials to their respective speeds
   string menu = "Select a material: ";
   map<char, int> options;
   for (int i = 0; i < file_contents.size(); i += 2){
-    //Print the materials and speeds
-    cout << file_contents[i] << "\t" << file_contents[i+1] << endl;
-
     //Skip table headings and map information
     if (i > 1) {
       //Create map
@@ -70,13 +67,13 @@ int main() {
     else {
       //Prompt for thickness
       cout << "How thick is the material (in feet): ";
-      double thickness;
-      cin >> thickness;
+      double displacement;
+      cin >> displacement;
 
       //Output displacement of sound wave
-      double displacement = options[option] * thickness;
-      cout << "The sound will travel ";
-      printf("%0.4f feet\n", displacement);
+      double time = displacement / options[option];
+      cout << "The sound will travel " << displacement << " feet in ";
+      printf("%0.4f seconds\n", time);
     }
   }
   return 0;
