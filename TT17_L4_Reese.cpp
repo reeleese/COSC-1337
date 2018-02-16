@@ -60,6 +60,12 @@ int main() {
     char option;
     cin >> option;
     option = tolower(option);
+
+    //Check for quit
+    if (option == 'q') {
+      cout << "Goodbye.";
+      done = true;
+    }
     
     while (materials[option] == 0) {
       cout <<"Invalid material option.\n";
@@ -67,30 +73,25 @@ int main() {
       cin >> option;
       option = tolower(option);
     }
-    //Check for quit
-    if (option == 'q') {
-      cout << "Goodbye.";
-      done = true;
-    }
 
-    else {
-      //Get displacement
-      cout << "How thick is the material (in feet): ";
-      double displacement = 0;  
-      cin >> displacement;
+    
+    //Get displacement
+    cout << "How thick is the material (in feet): ";
+    double displacement = 0;  
+    cin >> displacement;
       
-      //Displacement input validation
-      while (displacement < 0) {
-	cout <<"Thickness must not be negative.\n";
-	cout << "How thick is the material (in feet): ";
-	cin >> displacement;
-      }
-
-      //Output time for sound to pass through material
-      double time_for = displacement / materials[option];
-      cout << "The sound will travel " << displacement << " feet in ";
-      printf("%0.4f seconds\n", time_for);
+    //Displacement input validation
+    while (displacement < 0) {
+      cout <<"Thickness must not be negative.\n";
+      cout << "How thick is the material (in feet): ";
+      cin >> displacement;
     }
+
+    //Output time for sound to pass through material
+    double time_for = displacement / materials[option];
+    cout << "The sound will travel " << displacement << " feet in ";
+    printf("%0.4f seconds\n", time_for);
+
     //Seperate loops
     cout << endl;
   }
