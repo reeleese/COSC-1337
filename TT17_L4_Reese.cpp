@@ -55,15 +55,19 @@ int main() {
   //Loop
   bool done = false;
   while (!done) {
+    //Prompt for material
     cout << menu;
     char option;
     cin >> option;
-    tolower(option);
-    cout << option << endl;
-    //Get thickness
+    option = tolower(option);
+    
+    //Prompt for thickness
     cout << "How thick is the matarial (in feet): ";
     double thickness;
     cin >> thickness;
+
+    double displacement = options[option] * thickness;
+    cout << "The sound will travel " << displacement << " feet" << endl;
 
   }
   return 0;
