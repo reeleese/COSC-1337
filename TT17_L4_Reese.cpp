@@ -29,28 +29,30 @@ int main() {
   }
   my_file.close();
   
-  //Create menu, map materials to their respective speeds
+  //Menu to show user and map to process user input
   string menu = "Select a material: ";
-  map<char, int> options;
+  map<char, int> materials;
+
+  //Populate menu and materials
   for (int i = 0; i < file_contents.size(); i += 2){
-    //Skip table headings and map information
+    //Skip table headings
     if (i > 1) {
-      //Create map
+      //Update map
       char key = tolower(file_contents[i][0]);
       int value = atoi(file_contents[i+1].c_str());
-      options[key] = value;
+      materials[key] = value;
       
-      //Menu
+      //Update menu
       string tmp = file_contents[i];
       tmp[0] = tolower(tmp[0]);
       tmp.insert(1, ")");
       menu = menu + tmp + ", ";
     }
   }
+
   //Add the quit option to the menu
   menu += "or q)uit: ";
 
-  //Loop
   bool done = false;
   while (!done) {
     //Prompt for material
@@ -60,20 +62,35 @@ int main() {
     option = tolower(option);
     
     //Check for quit
-    if (option == 'q')
+    if (option == 'q') {
+      cout << "Goodbye.";
       done = true;
+    }
+    
+    //Material input validation
+    else if (materials[option] == 0)
+      cout << "Invalid material option.\n";
     
     else {
-      //Prompt for thickness
+      //Get displacement
       cout << "How thick is the material (in feet): ";
-      double displacement;
+      double displacement = 0;  
       cin >> displacement;
+      
+      //Displacement input validation
+      while (displacement < 0) {
+	cout <<"Thickness must not be negative.\n";
+	cout << "How thick is the material (in feet): ";
+	cin >> displacement;
+      }
 
-      //Output displacement of sound wave
-      double time = displacement / options[option];
+      //Output time for sound to pass through material
+      double time_for = displacement / materials[option];
       cout << "The sound will travel " << displacement << " feet in ";
-      printf("%0.4f seconds\n", time);
+      printf("%0.4f seconds\n", time_for);
     }
+    //Seperate loops
+    cout << endl;
   }
   return 0;
 }
