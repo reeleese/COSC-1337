@@ -55,7 +55,11 @@ int main() {
   //Loop
   bool done = false;
   while (!done) {
-    cout << menu << endl;
+    cout << menu;
+    char option;
+    cin >> option;
+    tolower(option);
+    cout << option << endl;
     //Get thickness
     cout << "How thick is the matarial (in feet): ";
     double thickness;
