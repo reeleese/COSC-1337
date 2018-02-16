@@ -37,7 +37,7 @@ int main() {
       options[key] = value;
     }
   }
-  cout << options['s'];
+  cout << options['i'];
     
 
   /*
