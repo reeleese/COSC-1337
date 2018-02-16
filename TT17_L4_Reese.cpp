@@ -76,9 +76,9 @@ int main() {
       
       //Displacement input validation
       while (displacement < 0) {
-	cout <<"Thickness must not be negative.\n";
-	cout << "How thick is the material (in feet): ";
-	cin >> displacement;
+        cout <<"Thickness must not be negative.\n";
+        cout << "How thick is the material (in feet): ";
+        cin >> displacement;
       }
 
       //Output time for sound to pass through material
