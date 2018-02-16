@@ -45,12 +45,13 @@ int main() {
       
       //Menu
       string tmp = file_contents[i];
+      tmp[0] = tolower(tmp[0]);
       tmp.insert(1, ")");
       menu = menu + tmp + ", ";
     }
   }
-  
-  menu.resize(menu.size() -2);
+  menu.resize(menu.size() -2); // remove trailing ", ";
+  menu += ": ";
   //Loop
   bool done = false;
   while (!done) {
