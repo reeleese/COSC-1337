@@ -19,13 +19,13 @@ using namespace std;
 int main() {
   //Read in file
   string filename = "lab4_info.txt";
-  ifstream speeds{filename};
+  ifstream my_file{filename};
 
   //Read file into a vector file_contents
   vector<string> file_contents;
-  if (speeds) {
+  if (my_file) {
     string item = "notAnInt";
-    while (speeds >> item) {
+    while (my_file >> item) {
       file_contents.push_back(item);
     }
   }
