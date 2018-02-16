@@ -13,6 +13,7 @@ TODO:
 #include <fstream>
 #include <vector>
 #include <map>
+#include <stdio.h>
 using namespace std;
 
 int main() {
@@ -50,8 +51,7 @@ int main() {
       menu = menu + tmp + ", ";
     }
   }
-  menu.resize(menu.size() -2); // remove trailing ", ";
-  menu += ": ";
+  menu += "or q)uit: ";
   //Loop
   bool done = false;
   while (!done) {
@@ -62,12 +62,14 @@ int main() {
     option = tolower(option);
     
     //Prompt for thickness
-    cout << "How thick is the matarial (in feet): ";
+    cout << "How thick is the material (in feet): ";
     double thickness;
     cin >> thickness;
 
+    //Output displacement of sound wave
     double displacement = options[option] * thickness;
-    cout << "The sound will travel " << displacement << " feet" << endl;
+    cout << "The sound will travel ";
+    printf("%0.4f feet\n", displacement);
 
   }
   return 0;
