@@ -18,7 +18,7 @@ const int min_year{1900};
 int main(){
   //Read in people.txt
   string file_name = "people.txt";
-  ifstream my_pop("people.txt");
+  ifstream my_pop(file_name);
   
   //Container for each population recorded stored in chronological order
   vector<int> populations;
