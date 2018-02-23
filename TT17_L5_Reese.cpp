@@ -50,13 +50,14 @@ int main(){
   //Record maximum year
   const int max_year = 1900 + (populations.size() -1) * 20;
   
+  //Record the horizontal space needed for y-axis labels
   int y_label_width = to_string(max_population).length();
   
-  //Print the y-axis and bars
-  for (int i = max_population; i > 0; i-=1000) {
-    cout << setw(y_label_width) << i;
+  //Print the y-axis and columns
+  for (int y_value = max_population; y_value > 0; y_value -= 1000) {
+    cout << setw(y_label_width) << y_value;
     for (int population : populations) {
-      cout << (population >= i ? " ** " : "    ");
+      cout << (population >= y_value ? " ** " : "    ");
       cout << "  ";
     }
     cout << endl;
