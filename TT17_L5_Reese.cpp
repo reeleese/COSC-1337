@@ -53,22 +53,25 @@ int main(){
   //Record the horizontal space needed for y-axis labels
   int y_label_width = to_string(max_population).length();
   
-  //Print the y-axis and columns
+  //Print the y-axis labels and columns
   for (int y_value = max_population; y_value > 0; y_value -= 1000) {
-    cout << setw(y_label_width) << y_value;
+    cout << setw(y_label_width) << y_value;              //print y-axis
     for (int population : populations) {
-      cout << (population >= y_value ? " ** " : "    ");
-      cout << "  ";
+      cout << (population >= y_value ? " ** " : "    "); //The actual column
+      cout << "  ";                                      //space after column
     }
     cout << endl;
   }
   
-  //Print the x-axis
-  cout << setw(y_label_width) << " ";
+  // x-axis label offset (the bottom left corner)
+  cout << setw(y_label_width) << " "; 
+ 
+  //Print the x-axis labels
   for (int year = min_year; year <= max_year; year += 20)
     cout << year << "  ";
   cout << endl;
 
+  //The end
   return 0;
 }
 
