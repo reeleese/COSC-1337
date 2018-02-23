@@ -5,7 +5,6 @@
 TODO:
 -Add purpose
 -Add program output
--Calculate y-label width dynamically
 */
 
 #include <iostream>
@@ -36,11 +35,11 @@ int main(){
   for(int population : populations)
     if (population > max_population)
       max_population = population;
-  
+
   //Record maximum year
   const int max_year = 1900 + (populations.size() -1) * 20;
   
-  int y_label_width = 5;
+  int y_label_width = to_string(max_population).length();
   
   //Print the y-axis and bars
   for (int i = max_population; i > 0; i-=1000) {
