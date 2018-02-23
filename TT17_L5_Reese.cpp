@@ -1,19 +1,11 @@
 // Author: Lee Reese;  Course: COSC 1337 Spring 2018 TT17;  Instructor: Thayer
-// Lab: 4  Purpose:
-
-/*
-TODO:
--Add purpose
--Add program output
-*/
+// Lab: 5  Purpose: Take file with population data and output a graph of the data
 
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <vector>
 using namespace std;
-
-const int min_year{1900};
 
 int main(){
   //Create filestream
@@ -25,6 +17,7 @@ int main(){
   
   //If file successfully opens
   if (my_pop) {
+    //Direct stream to population and convert it to an integer for populations
     string population{};
     while (my_pop >> population)
       populations.push_back(atoi(population.c_str()));
@@ -49,6 +42,9 @@ int main(){
 
   //Record maximum year
   const int max_year = 1900 + (populations.size() -1) * 20;
+  
+  //Assume first year
+  const int min_year{1900};
   
   //Record the horizontal space needed for y-axis labels
   int y_label_width = to_string(max_population).length();
@@ -77,5 +73,23 @@ int main(){
 
 /*
 Program Output:
-
+18000                               **   
+17000                               **   
+16000                               **   
+15000                               **   
+14000                         **    **   
+13000                         **    **   
+12000                         **    **   
+11000                         **    **   
+10000                         **    **   
+ 9000                   **    **    **   
+ 8000                   **    **    **   
+ 7000                   **    **    **   
+ 6000                   **    **    **   
+ 5000             **    **    **    **   
+ 4000       **    **    **    **    **   
+ 3000       **    **    **    **    **   
+ 2000 **    **    **    **    **    **   
+ 1000 **    **    **    **    **    **   
+     1900  1920  1940  1960  1980  2000 
 */
