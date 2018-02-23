@@ -16,18 +16,28 @@ using namespace std;
 const int min_year{1900};
 
 int main(){
-  //Read in people.txt
+  //Create filestream
   string file_name = "people.txt";
   ifstream my_pop(file_name);
   
   //Container for each population recorded stored in chronological order
   vector<int> populations;
   
+  //If file successfully opens
   if (my_pop) {
     string population{};
     while (my_pop >> population)
       populations.push_back(atoi(population.c_str()));
   }
+  
+  //If file fails to open
+  else {
+    cout << "Did not successfully open file: " << file_name << endl;
+    cout << "Exiting program..." << endl;
+    return 1;
+  }
+
+  //Close filestream
   my_pop.close();
 
   //Record maximum population
