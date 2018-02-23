@@ -41,10 +41,11 @@ int main(){
   my_pop.close();
 
   //Record maximum population
-  int max_population{0};
+  int max_pop{0};
   for(int population : populations)
-    if (population > max_population)
-      max_population = population;
+    if (population > max_pop)
+      max_pop = population;
+  const int max_population = max_pop;
 
   //Record maximum year
   const int max_year = 1900 + (populations.size() -1) * 20;
