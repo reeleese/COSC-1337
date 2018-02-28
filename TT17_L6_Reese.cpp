@@ -21,8 +21,8 @@ float second;
 
 //Error Messages
 const string error_char = "  Sorry, character must be alphabetic. Try again.";
-const string error_number = "Sorry, out-of-range. Try again.";
-const string error_point = "This error should never happen.";
+const string error_number = "  Sorry, out-of-range. Try again.";
+const string error_point = "  This error should never happen.";
 
 //Prompts
 const string prompt_char = "Gimme a character: ";
@@ -65,18 +65,26 @@ float input(string prompt, float min, float max, string error_message) {
 
   return user_input;
 }
-/*
-void input(string prompt, double &x, double &y, string error_message) {  
-  //Input
-  string user_x{};
-  do {
-    cout << "Enter the "<< iteration << " point (x): ";
-    
-  } while (!(cin >> x));
 
-  cout << "Enter the " << iteration << " point (y): ";
-  cin >> y;
-}*/
+void input(string prompt, double &x, double &y, string error_message) {  
+  //Prompt for x
+  cout <<  prompt << " (x): ";
+  while (!(cin >> x)) {
+    cout << error_point << endl;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << prompt << " (x): ";
+  }
+  
+  //Prompt for y
+  cout <<  prompt << " (y): ";
+  while (!(cin >> y)) {
+    cout << error_point << endl;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << prompt << " (y): ";
+  }
+}
 
 //Distance functions
 int dist(char a, char b) {
@@ -145,6 +153,10 @@ int main() {
       float num2 = input("Enter the next number", -100, 100, error_number);
       float distance = dist(num1, num2);
       display("Units between", num1, num2, distance);
+    }
+    else if (option == 'p') {
+      double x1; double x2;
+      input("Enter the first point", x1, x2, error_point);
     }
     else if (option == 'q') {
       cout << "Good-bye!";
