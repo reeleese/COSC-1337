@@ -100,12 +100,14 @@ void display(string msg, char ch1, char ch2, int d){
   cout << "(#" << count << ") "
        << msg << " " << ch1 << " and " << ch2 << " = "
        << d;
+  ++count;
 }
 void display(string msg, float f1, float f2, float d){
   static int count = 1;
   cout << "(#" << count << ") "
        << "Units between " << f1 << " and " << f2 << " = "
        << d;
+  ++count;
 }
 void display(string msg, double x1, double y1, double x2, double y2, double d){
   static int count = 1;
@@ -114,6 +116,7 @@ void display(string msg, double x1, double y1, double x2, double y2, double d){
        << "(" << x1 << ", " << y1 << ") and " 
        <<  "(" << x2 << ", " << y2 << ") is: "
        << d;
+  ++count;
 }
 
 int main() {
