@@ -1,11 +1,6 @@
 // Author: Lee Reese;  Course: COSC 1337 Spring 2018 TT17;  Instructor: Thayer
 // Lab: 6  Purpose: Calculate the distance between two things
 
-/*
-TODO:
--Program output
-*/
-
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -20,7 +15,7 @@ char input(string prompt, string error_message);
 float input(string prompt, float min, float max, string error_message);
 void input(string prompt, double &x, double &y, string error_message);
 void point_input_helper(string prompt, double &destination, char axis,
-			string error_message);
+                        string error_message);
 //Distance functions
 int dist(char a, char b);
 float dist(float a, float b);
@@ -31,6 +26,7 @@ void display(string msg, char ch1, char ch2, int d);
 void display(string msg, float f1, float f2, float d);
 void display(string msg, double x1, double y1, double x2, double y2, double d);
 
+//Main
 int main() {
   //Display program purpose
   cout << "Display the distance between two items: letters numbers, or points."
@@ -148,7 +144,7 @@ void input(string prompt, double &x, double &y, string error_message) {
 }
 //Input helper: handles input validation and reduces reduncancy
 void point_input_helper(string prompt, double &destination, char axis,
-			string error_message) {
+                        string error_message) {
   cout <<  prompt << " (" << axis << "): ";
   while (!(cin >> destination)) {
     cout << error_message << endl;
@@ -175,5 +171,46 @@ void display(string msg, double x1, double y1, double x2, double y2, double d){
 }
 /*
 Program Output:
+Display the distance between two items: letters numbers, or points.
 
+Options: l)etter; n)umber; p)oint; q)uit: l
+Enter the first letter (a to z): b
+Enter the second letter (a to z): f
+(#1) Distance between letters b & f = 4
+
+Options: l)etter; n)umber; p)oint; q)uit: n
+Enter the first number (-100, 100): -5
+Enter the next number (-100, 100): 20
+(#1) Units between -5 and 20 = 25
+
+Options: l)etter; n)umber; p)oint; q)uit: p
+Enter the first point (x): 0
+Enter the first point (y): 3
+Enter the second point (x): 4
+Enter the second point (y): 0
+(#1) Straight line distance between (0, 3) and (4, 0) is: 5
+
+Options: l)etter; n)umber; p)oint; q)uit: l
+Enter the first letter (a to z): 8
+  Sorry, character must be alphabetic. Try again.
+  Enter the first letter (a to z): A
+  Enter the second letter (a to z): z
+(#2) Distance between letters A & z = 25
+
+Options: l)etter; n)umber; p)oint; q)uit: n
+Enter the first number (-100, 100): -123.456
+  Sorry, out-of-range. Try again.
+  Enter the first number (-100, 100): -10
+  Enter the next number (-100, 100): 50
+(#2) Units between -10 and 50 = 60
+
+Options: l)etter; n)umber; p)oint; q)uit: p
+Enter the first point (x): 0
+Enter the first point (y): 0
+Enter the second point (x): 1
+Enter the second point (y): 1
+(#2) Straight line distance between (0, 0) and (1, 1) is: 1.41421
+
+Options: l)etter; n)umber; p)oint; q)uit: q
+Good-bye!
 */
