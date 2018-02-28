@@ -140,7 +140,12 @@ int main() {
       int distance = dist(char1, char2);
       display("Distance between letters", char1, char2, distance);
     }
-
+    else if (option == 'n') {
+      float num1 = input("Enter the first number", -100, 100, error_number);
+      float num2 = input("Enter the next number", -100, 100, error_number);
+      float distance = dist(num1, num2);
+      display("Units between", num1, num2, distance);
+    }
     else if (option == 'q') {
       cout << "Good-bye!" << endl;
     }
