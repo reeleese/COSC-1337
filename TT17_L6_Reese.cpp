@@ -58,7 +58,7 @@ float input(string prompt, float min, float max, string error_message) {
   cin >> user_input;
 
   //If user is not in range, try again.
-  if (!(min <= user_input <= max)) {
+  if (user_input < min ||  user_input > max) {
     cout << error_message << endl;
     return input(prompt, min, max, error_message);
   }
@@ -147,7 +147,7 @@ int main() {
       display("Units between", num1, num2, distance);
     }
     else if (option == 'q') {
-      cout << "Good-bye!" << endl;
+      cout << "Good-bye!";
     }
 
     else {
