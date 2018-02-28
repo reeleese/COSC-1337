@@ -15,14 +15,9 @@ TODO:
 using namespace std;
 
 //Variables
-bool first_input;
 float first;
 float second;
 
-//Display Counts
-static int display_char{0}; 
-static int display_number{0}; 
-static int display_point{0}; 
 
 //Error Messages
 const string error_char = "  Sorry, character must be alphabetic. Try again.";
@@ -35,10 +30,9 @@ const string prompt_number = "Gimme a number";
 const string prompt_point = "";
 
 //Input Functions
-char input(string error_message) {
+char input(string prompt, string error_message) {
   //Prompt
-  cout << (first_input ? "Enter first letter ":"Enter second letter ")
-       << "(a to z): ";
+  cout << prompt;
   
   //Input
   char user_input{};
@@ -49,15 +43,15 @@ char input(string error_message) {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << error_message << endl;
-    return input(error_message);
+    return input(prompt, error_message);
   }
   return user_input;
 }
 
-float input(float min, float max, string error_message) {
+float input(string prompt, float min, float max, string error_message) {
   //Prompt
-  cout << (first_input ? "Enter first number ":"Enter second number ")
-       << "(" << min << ", " << max << "): ";
+  cout << prompt
+       << " (" << min << ", " << max << "): ";
   
   //Get Number
   float user_input{};
@@ -66,17 +60,13 @@ float input(float min, float max, string error_message) {
   //If user is not in range, try again.
   if (!(min <= user_input <= max)) {
     cout << error_message << endl;
-    return input(error_message);
+    return input(prompt, min, max, error_message);
   }
 
-  first_input = false;
   return user_input;
 }
-
-void input(double &x, double &y, string error_message) {
-  //Prompt
-  string iteration = (first_input ? "first" : "second");
-  
+/*
+void input(string prompt, double &x, double &y, string error_message) {  
   //Input
   string user_x{};
   do {
@@ -86,7 +76,7 @@ void input(double &x, double &y, string error_message) {
 
   cout << "Enter the " << iteration << " point (y): ";
   cin >> y;
-}
+}*/
 
 //Distance functions
 int dist(char a, char b) {
@@ -105,11 +95,30 @@ float dist(double x1, double y1, double x2, double y2) {
 }
 
 //Display functions
-
+void display(string msg, char ch1, char ch2, int d){
+  static int count = 1;
+  cout << "(#" << count << ") "
+       << msg << " " << ch1 << " and " << ch2 << " = "
+       << d;
+}
+void display(string msg, float f1, float f2, float d){
+  static int count = 1;
+  cout << "(#" << count << ") "
+       << "Units between " << f1 << " and " << f2 << " = "
+       << d;
+}
+void display(string msg, double x1, double y1, double x2, double y2, double d){
+  static int count = 1;
+  cout << "(#" << count << ") "
+       << "Straight line distance between " 
+       << "(" << x1 << ", " << y1 << ") and " 
+       <<  "(" << x2 << ", " << y2 << ") is: "
+       << d;
+}
 
 int main() {
   //Display program purpose
-  cout << "Display the distance between two itms: lettersn numbers, or points."
+  cout << "Display the distance between two items: letters numbers, or points."
        << "\n\n";
 
   //Sentinel
@@ -122,25 +131,22 @@ int main() {
     cin >> option;
     option = tolower(option);
 
-    //Reset stuff
-    first_input = true; first = 0; second = 0;
-
-
-    switch (option) {
-      case 'l':
-	first = float (input(error_char));
-	second = float (input(error_char));
-	break;
-      case 'n':
-	first = input(-100, 100, error_number);
-	second = input(-100, 100, error_number);
-	break;
-      case 'p':
-	break;
-      case 'q':
-	cout << "Good-bye!" << endl;
-	break;
+    if (option == 'l') {
+      char char1 = input("Enter the first letter (a to z): ", error_char);
+      char char2 = input("Enter the second letter (a to z): ", error_char);
+      int distance = dist(char1, char2);
+      display("Distance between letters", char1, char2, distance);
     }
+
+    else if (option == 'q') {
+      cout << "Good-bye!" << endl;
+    }
+
+    else {
+      cout << "Invalid option choice." << endl;
+    } 
+    
+    cout << "\n\n";
   } while (option != 'q');
   return 0;
 }
