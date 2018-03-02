@@ -107,7 +107,7 @@ int main() {
   cout << "\nFor boss' eyes only:\n"
        << "Of 10000 people, "
        << wins << " people won: " 
-       << setprecision(2) << fixed << win_percent
+       << setprecision(2) << fixed << win_percent << " percent."
        << endl;
 
   //Goodbye
