@@ -23,7 +23,7 @@ int get_input(const string& prompt, const string& error_msg,
 	       int min_value, int max_value, bool range_check = true);
 char get_choice();
 void fix_cin();
-bool isvalid_day_moth(int day, int month);
+bool isvalid_day_month(int day, int month);
 
 //MAIN
 int main() {
