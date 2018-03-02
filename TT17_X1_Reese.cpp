@@ -23,7 +23,9 @@ int get_input(const string& prompt, const string& error_msg,
 	       int min_value, int max_value, bool range_check = true);
 char get_choice();
 void fix_cin();
+bool isvalid_day_moth(int day, int month);
 
+//MAIN
 int main() {
   //Welcome message
   cout << "This program does nothing." << endl;
@@ -44,21 +46,21 @@ int main() {
 
     if (choice != 'a' && choice != 'r') {
       switch (choice) {
-        case 'y' :
+      case 'y' : //year
 	  year = get_input("What is your birth year", "error", 1900, 2017);
 	  break;
 
-        case 'm' :
+      case 'm' : //month
 	  month = get_input("What is your birth month", "error", 1, 12);
 	  break;
 
-        case 'd' :
+      case 'd' : //day
 	  day = get_input("Which is your birth day", "error", 1, 31);
 	  break;
 
-        default  :
-	  cout << "Not a valid choice." << endl;
-	  break;
+      default  : //Bad choice
+	cout << "Not a valid choice." << endl;
+	break;
       }
     }
   } while(choice != 'a' && choice != 'r');
@@ -116,4 +118,43 @@ char get_choice() {
   }
   choice = tolower(choice);
   return choice;
+}
+
+/*
+  Function: isvalid_day_month
+  Purpose: Determine whether a month-day pair represents a valid date
+*/
+bool isvalid_day_month(int day, int month) {
+  const int Jan=31, Feb=28, Mar=31, Apr=30, May=31, Jun=30, Jul=31, 
+            Aug=31, Sep=30, Oct=31, Nov=30, Dec=31;
+
+  switch (month) {
+    case 1 : 
+      return (month <= Jan? true : false);
+    case 2 : 
+      return (month <= Feb? true : false);
+    case 3 : 
+      return (month <= Mar? true : false);
+    case 4 : 
+      return (month <= Apr? true : false);
+    case 5 : 
+      return (month <= May? true : false);
+    case 6 : 
+      return (month <= Jun? true : false);
+    case 7 : 
+      return (month <= Jul? true : false);
+    case 8 : 
+      return (month <= Aug? true : false);
+    case 9 : 
+      return (month <= Sep? true : false);
+    case 10 : 
+      return (month <= Oct? true : false);
+    case 11 : 
+      return (month <= Nov? true : false);
+    case 12 : 
+      return (month <= Dec? true : false);
+      
+  }
+  //For really weird pairs
+  return false;
 }
