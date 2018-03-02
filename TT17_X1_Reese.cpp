@@ -88,12 +88,10 @@ int main() {
 
     //Refuse
     else if (choice == 'r') {
-      cout << "Birthday set to 0/0/0000.";
       year = 0;
       month = 0;
       day = 0;
     }
-
   } while(choice != 'a' && choice != 'r');
   
   cout << endl; //formatting
@@ -106,11 +104,14 @@ int main() {
   int wins = 0;
   double win_percent = -1;
   test_for_boss(10000, 100, wins, win_percent);
-  cout << "For boss' eyes only: " << endl
+  cout << "\nFor boss' eyes only:\n"
        << "Of 10000 people, "
        << wins << " people won: " 
        << setprecision(2) << fixed << win_percent
        << endl;
+
+  //Goodbye
+  cout << "Goodbye!" << endl;
 }
 
 /*
@@ -239,7 +240,7 @@ bool won_prize(int chance) {
 */
 void test_for_boss(int count, int chance, int& wins, double& win_percent) {
   for (int i = 0; i < count; i++) {
-    if (won_prize(chance)) {wins++;}
+    if (won_prize(chance)) wins++;
   }
   win_percent =  double(wins) / double(count) * 100;
 }
