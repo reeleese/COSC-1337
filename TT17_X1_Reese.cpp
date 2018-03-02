@@ -23,7 +23,7 @@ int get_input(const string& prompt, const string& error_msg,
 	       int min_value, int max_value, bool range_check = true);
 char get_choice();
 void fix_cin();
-bool isvalid_day_month(int day, int month);
+bool isvalid_day_month_year(int day, int month, int year);
 
 //MAIN
 int main() {
@@ -42,7 +42,7 @@ int main() {
     cout << endl; //formatting
 
     //Let the user know if they have given an invalid date
-    bool bad_birthday = !isvalid_day_month(day, month);
+    bool bad_birthday = !isvalid_day_month_year(day, month, year);
     if (bad_birthday)
       cout << "NOTICE: Your given birthday is not a valid date "
 	   << "and cannot be accepted." << endl;
@@ -74,17 +74,22 @@ int main() {
       }
     }
     
-    //User tries to accept but birthday is invalid
-    if (choice == 'a' && bad_birthday) {
-      cout << "You have provided an invalid birthday and may not accept. "
-	   << endl;
-      choice = '_';
-    }
+    //Accept
     else if (choice == 'a') {
-
+      //Accept but invalid b-day
+      if (bad_birthday) {
+	cout << "You have provided an invalid birthday and may not accept. "
+	     << endl;
+	choice = '_';
+      }
+      cout << "Your birthday has been accepted.";
     }
+    //Refuse
     else if (choice == 'r') {
-
+      cout << "Birthday set to 0/0/0000";
+      year = 0;
+      month = 0;
+      day = 0;
     }
   } while(choice != 'a' && choice != 'r');
 }
@@ -144,13 +149,26 @@ char get_choice() {
 }
 
 /*
-  Function: isvalid_day_month
+  Function: isvalid_day_month_year
   Purpose: Determine whether a month-day pair represents a valid date
 */
-bool isvalid_day_month(int day, int month) {
+bool isvalid_day_month_year(int day, int month, int year) {
   const int Jan=31, Feb=28, Mar=31, Apr=30, May=31, Jun=30, Jul=31, 
             Aug=31, Sep=30, Oct=31, Nov=30, Dec=31;
 
+  //Leap Years
+  if (day == 29 && month == 2) {
+    if (year % 4 != 0)
+      return false;
+    else if (year % 100 != 0)
+      return true;
+    else if (year % 400 != 0)
+      return false;
+    else
+      return true;
+  }
+
+  //Common Years
   switch (month) {
     case 1 : 
       return (day <= Jan? true : false);
