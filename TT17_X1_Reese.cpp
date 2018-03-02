@@ -39,29 +39,52 @@ int main() {
 
   //Menu
   do {
+    cout << endl; //formatting
+
+    //Let the user know if they have given an invalid date
+    bool bad_birthday = !isvalid_day_month(day, month);
+    if (bad_birthday)
+      cout << "NOTICE: Your given birthday is not a valid date "
+	   << "and cannot be accepted." << endl;
+
+    //Menu
     cout << "Your birthday is: " << month << "/" << day << "/" << year << " "
 	 << "CHANGE: m)onth, d)ay, y)ear; OR a)ccept, r)efuse?" << endl
 	 << "Choice: ";
     choice = get_choice();
-
+    
+    //Edit day, month, year
     if (choice != 'a' && choice != 'r') {
       switch (choice) {
-      case 'y' : //year
+        case 'y' : //year
 	  year = get_input("What is your birth year", "error", 1900, 2017);
 	  break;
 
-      case 'm' : //month
+        case 'm' : //month
 	  month = get_input("What is your birth month", "error", 1, 12);
 	  break;
 
-      case 'd' : //day
+        case 'd' : //day
 	  day = get_input("Which is your birth day", "error", 1, 31);
 	  break;
 
-      default  : //Bad choice
-	cout << "Not a valid choice." << endl;
-	break;
+        default  : //Bad choice
+	  cout << "Not a valid choice." << endl;
+	  break;
       }
+    }
+    
+    //User tries to accept but birthday is invalid
+    if (choice == 'a' && bad_birthday) {
+      cout << "You have provided an invalid birthday and may not accept. "
+	   << endl;
+      choice = '_';
+    }
+    else if (choice == 'a') {
+
+    }
+    else if (choice == 'r') {
+
     }
   } while(choice != 'a' && choice != 'r');
 }
@@ -130,29 +153,29 @@ bool isvalid_day_month(int day, int month) {
 
   switch (month) {
     case 1 : 
-      return (month <= Jan? true : false);
+      return (day <= Jan? true : false);
     case 2 : 
-      return (month <= Feb? true : false);
+      return (day <= Feb? true : false);
     case 3 : 
-      return (month <= Mar? true : false);
+      return (day <= Mar? true : false);
     case 4 : 
-      return (month <= Apr? true : false);
+      return (day <= Apr? true : false);
     case 5 : 
-      return (month <= May? true : false);
+      return (day <= May? true : false);
     case 6 : 
-      return (month <= Jun? true : false);
+      return (day <= Jun? true : false);
     case 7 : 
-      return (month <= Jul? true : false);
+      return (day <= Jul? true : false);
     case 8 : 
-      return (month <= Aug? true : false);
+      return (day <= Aug? true : false);
     case 9 : 
-      return (month <= Sep? true : false);
+      return (day <= Sep? true : false);
     case 10 : 
-      return (month <= Oct? true : false);
+      return (day <= Oct? true : false);
     case 11 : 
-      return (month <= Nov? true : false);
+      return (day <= Nov? true : false);
     case 12 : 
-      return (month <= Dec? true : false);
+      return (day <= Dec? true : false);
       
   }
   //For really weird pairs
