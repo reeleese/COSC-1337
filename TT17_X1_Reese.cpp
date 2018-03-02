@@ -8,27 +8,25 @@
   Upload file: TT17_X1_Lastname.cpp to BlackBoard Assignment link.
 */
 
-/*
-TODO:
--Make get_input handle unusual numbers
--output b-day in MM/DD/YYYY
-
-*/
-
 #include <iostream>
 #include <iomanip>
+#include <time.h>
+#include <math.h>
 using namespace std;
 
-int get_input(const string& prompt, const string& error_msg, 
-	       int min_value, int max_value, bool range_check = true);
+//Function prototypes
+int get_input(const string&, const string&, int, int, bool = true);
 char get_choice();
 void fix_cin();
-bool isvalid_day_month_year(int day, int month, int year);
+bool isvalid_day_month_year(int, int, int);
+bool won_prize(int);
+void test_for_boss(int, int, int&, double&);
 
 //MAIN
 int main() {
   //Welcome message
-  cout << "This program does nothing." << endl;
+  cout << "This program records your birthday and "
+       << "gives you the chance to win a prize." << endl;
 
   //Get initial birthday values
   int year = get_input("What is your birth year", "error", 1900, 2017);
@@ -48,7 +46,10 @@ int main() {
 	   << "and cannot be accepted." << endl;
 
     //Menu
-    cout << "Your birthday is: " << month << "/" << day << "/" << year << " "
+    cout << "Your birthday is: " 
+	 << setfill('0') << setw(2) << month << "/" 
+	 << setfill('0') << setw(2) << day << "/" 
+	 << year << " "
 	 << "CHANGE: m)onth, d)ay, y)ear; OR a)ccept, r)efuse?" << endl
 	 << "Choice: ";
     choice = get_choice();
@@ -84,14 +85,32 @@ int main() {
       }
       cout << "Your birthday has been accepted.";
     }
+
     //Refuse
     else if (choice == 'r') {
-      cout << "Birthday set to 0/0/0000";
+      cout << "Birthday set to 0/0/0000.";
       year = 0;
       month = 0;
       day = 0;
     }
+
   } while(choice != 'a' && choice != 'r');
+  
+  cout << endl; //formatting
+  
+  //Give user opportunity to win a priz
+  cout << (won_prize(100)? "You won a prize!" : "You did not win a prize.")
+       << endl;
+
+  //Test for the boss
+  int wins = 0;
+  double win_percent = -1;
+  test_for_boss(10000, 100, wins, win_percent);
+  cout << "For boss' eyes only: " << endl
+       << "Of 10000 people, "
+       << wins << " people won: " 
+       << setprecision(2) << fixed << win_percent
+       << endl;
 }
 
 /*
@@ -198,4 +217,29 @@ bool isvalid_day_month_year(int day, int month, int year) {
   }
   //For really weird pairs
   return false;
+}
+
+/*
+  Function: won_prize()
+  Purpose: Let the user know if they won a prize
+*/
+bool won_prize(int chance) {
+  
+  //Generate winning value and users attempt
+  int random_win = rand() % chance;
+  int random_attempt = rand() % chance;
+
+  return random_win == random_attempt;
+}
+
+/*
+  Function: test_for_boss
+  Purpose: Validate experimental probability of winning a prize from
+  won_prize()
+*/
+void test_for_boss(int count, int chance, int& wins, double& win_percent) {
+  for (int i = 0; i < count; i++) {
+    if (won_prize(chance)) {wins++;}
+  }
+  win_percent =  double(wins) / double(count) * 100;
 }
