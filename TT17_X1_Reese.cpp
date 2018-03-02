@@ -11,7 +11,7 @@
 /*
 TODO:
 -Make get_input handle unusual numbers
-
+-output b-day in MM/DD/YYYY
 
 */
 
@@ -21,17 +21,62 @@ using namespace std;
 
 int get_input(const string& prompt, const string& error_msg, 
 	       int min_value, int max_value, bool range_check = true);
+char get_choice();
+void fix_cin();
 
 int main() {
+  //Welcome message
   cout << "This program does nothing." << endl;
+
+  //Get initial birthday values
   int year = get_input("What is your birth year", "error", 1900, 2017);
   int month = get_input("What is your birth month", "error", 1, 12);
   int day = get_input("Which is your birth day", "error", 1, 31);
+
+  char choice{};
+
+  //Menu
+  do {
+    cout << "Your birthday is: " << month << "/" << day << "/" << year << " "
+	 << "CHANGE: m)onth, d)ay, y)ear; OR a)ccept, r)efuse?" << endl
+	 << "Choice: ";
+    choice = get_choice();
+
+    if (choice != 'a' && choice != 'r') {
+      switch (choice) {
+        case 'y' :
+	  year = get_input("What is your birth year", "error", 1900, 2017);
+	  break;
+
+        case 'm' :
+	  month = get_input("What is your birth month", "error", 1, 12);
+	  break;
+
+        case 'd' :
+	  day = get_input("Which is your birth day", "error", 1, 31);
+	  break;
+
+        default  :
+	  cout << "Not a valid choice." << endl;
+	  break;
+      }
+    }
+  } while(choice != 'a' && choice != 'r');
 }
 
 /*
-Function: get_input
-Purpose: Get an int in range[min_value, max_value] from the user.
+  Function: fix_cin
+  Purpose: clear errors on cin and clear the buffer up to the point the enter
+  key was pressed
+*/
+void fix_cin() {
+  cin.clear();
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+
+/*
+  Function: get_input
+  Purpose: Get an int in range[min_value, max_value] from the user.
 */
 int get_input(const string& prompt, const string& error_msg, 
 	       int min_value, int max_value, bool range_check) {
@@ -46,8 +91,7 @@ int get_input(const string& prompt, const string& error_msg,
   //Ensure input is an int
   while (!(cin >> value)) {
     cout << error_msg << " Value must be an integer."<<endl;
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    fix_cin();
     return get_input(prompt, error_msg, min_value, max_value, range_check);
   }
 
@@ -58,4 +102,18 @@ int get_input(const string& prompt, const string& error_msg,
   } 
   return value;
 
+}
+
+/*
+  Function get_choice
+  Purpose: Get users choice for a menu
+*/
+char get_choice() {
+  char choice{};
+  while(!(cin >> choice)) {
+    fix_cin();
+    return get_choice();
+  }
+  choice = tolower(choice);
+  return choice;
 }
