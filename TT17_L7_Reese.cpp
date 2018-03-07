@@ -18,10 +18,23 @@ class Inventory{
     int _itemNumber;
     int _quantity;
     double _cost;
+
+    //Setters 
+    void setItemNumber(int itemNumber) {
+      _itemNumber = itemNumber;
+    }
+    void setQuantity(int quantity) {
+      _quantity = quantity;
+    }
+    void setCost(int cost) {
+      _cost = cost;
+    }
+
   public:
     Inventory(int itemNumber=0, int quantity=0, double cost=0) {
-      _itemNumber = itemNumber; _quantity = quantity; 
-      _cost = cost;
+      setItemNumber(itemNumber);
+      setQuantity(quantity);
+      setCost(cost);
     }
 
 };
