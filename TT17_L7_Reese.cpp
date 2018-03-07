@@ -31,12 +31,23 @@ class Inventory{
     }
 
   public:
+    //Constructor
     Inventory(int itemNumber=0, int quantity=0, double cost=0) {
       setItemNumber(itemNumber);
       setQuantity(quantity);
       setCost(cost);
     }
 
+    //Getters
+    int getItemNumber() {
+      return _itemNumber;
+    }
+    int getQuantity() {
+      return _quantity;
+    }
+    double getCost() {
+      return _cost;
+    }
 };
 
 
