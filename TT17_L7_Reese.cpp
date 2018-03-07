@@ -15,17 +15,17 @@ TODO:
 using namespace std;
 class Inventory{
   private:
-    int itemNumber;
-    int quantity;
-    double cost;
+    int _itemNumber;
+    int _quantity;
+    double _cost;
   public:
-    Inventory() {
-      itemNumber = 0;
-      quantity = 0;
-      cost = 0;
+    Inventory(int itemNumber=0, int quantity=0, double cost=0) {
+      _itemNumber = itemNumber; _quantity = quantity; 
+      _cost = cost;
     }
 
 };
+
 
 int main() {
 
