@@ -18,6 +18,7 @@ class Inventory{
     int _itemNumber;
     int _quantity;
     double _cost;
+    string _itemDescription;
 
     //Setters 
     void setItemNumber(int itemNumber) {
@@ -39,13 +40,13 @@ class Inventory{
     }
 
     //Getters
-    int getItemNumber() {
+    int getItemNumber() const {
       return _itemNumber;
     }
-    int getQuantity() {
+    int getQuantity() const {
       return _quantity;
     }
-    double getCost() {
+    double getCost() const {
       return _cost;
     }
 };
