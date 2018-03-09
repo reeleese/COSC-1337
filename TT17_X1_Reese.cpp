@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <time.h>
 #include <math.h>
+#include<limits>
 using namespace std;
 
 //Function prototypes

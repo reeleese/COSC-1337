@@ -25,7 +25,7 @@ class Inventory{
       _itemNumber = itemNumber;
     }
     void setQuantity(int quantity) {
-      _quantity = quantity;
+      if (quantity >= 0) _quantity = quantity;
     }
     void setCost(int cost) {
       if (cost >= 0) _cost = cost;
