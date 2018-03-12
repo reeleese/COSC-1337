@@ -4,13 +4,13 @@
 /*
 TODO:
 -Add purpose
-
+-Test code on a windows machine with devcpp
 
 
 
 
 */
-
+#include <string>
 #include <iostream>
 using namespace std;
 class Inventory{
@@ -60,18 +60,33 @@ class Inventory{
     }
 };
 
-void inventoryDriver(Inventory& thing, int number, int quantity, double cost) {
-  thing = Inventory(number, quantity, cost);
+void inventoryDriver_ouput(Inventory& thing) {
   cout << thing.getItemNumber() << endl
        << thing.getQuantity() << endl
        << thing.getCost() << endl
        << thing.getTotalCost() << endl;
 }
 
+int get_input(string prompt) {  
+  int itemCount{};
+  cout << prompt;
+  
+  //Ensure input is an int
+  while (!(cin >> itemCount)) {
+    cout << "Value must be an integer." << endl;
+    cin.clear();
+    cin.ignore(255, '\n');
+    cout << prompt; 
+  }
+
+  return itemCount;
+}
+
+void inventoryDriver() {
+    int itemCount = get_input("Number of items in inventory: ");
+}
+
+
 int main() { 
-  Inventory banana;
-  inventoryDriver(banana, 10, 6, 0.3);
-  Inventory ragu;
-  inventoryDriver(ragu, 42, 1, 2.34);
   return 0;
 }
