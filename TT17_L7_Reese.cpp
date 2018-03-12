@@ -30,6 +30,9 @@ class Inventory{
     void setCost(double cost) {
       if (cost >= 0) _cost = cost;
     }
+    void setItemDescription(string itemDescription) {
+      _itemDescription = itemDescription;
+    }
 
   public:
     //Constructor
@@ -51,6 +54,9 @@ class Inventory{
     }
     double getTotalCost() {
       return _cost * _quantity;
+    }
+    string getItemDescription() {
+      return _itemDescription;
     }
 };
 
