@@ -27,7 +27,7 @@ class Inventory{
     void setQuantity(int quantity) {
       if (quantity >= 0) _quantity = quantity;
     }
-    void setCost(int cost) {
+    void setCost(double cost) {
       if (cost >= 0) _cost = cost;
     }
 
@@ -54,9 +54,16 @@ class Inventory{
     }
 };
 
+void inventoryDriver(Inventory& thing, int number, int quantity, double cost) {
+  thing = Inventory(number, quantity, cost);
+  cout << thing.getItemNumber() << endl
+       << thing.getQuantity() << endl
+       << thing.getCost() << endl
+       << thing.getTotalCost() << endl;
+}
 
-int main() {
-
-
+int main() { 
+  Inventory banana;
+  inventoryDriver(banana, 10, 6, 0.3);
   return 0;
 }
