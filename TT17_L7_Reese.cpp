@@ -65,5 +65,7 @@ void inventoryDriver(Inventory& thing, int number, int quantity, double cost) {
 int main() { 
   Inventory banana;
   inventoryDriver(banana, 10, 6, 0.3);
+  Inventory ragu;
+  inventoryDriver(ragu, 42, 1, 2.34);
   return 0;
 }
