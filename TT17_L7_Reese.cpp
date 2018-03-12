@@ -49,6 +49,9 @@ class Inventory{
     double getCost() const {
       return _cost;
     }
+    double getTotalCost() {
+      return _cost * _quantity;
+    }
 };
 
 
