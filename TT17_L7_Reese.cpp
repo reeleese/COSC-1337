@@ -12,6 +12,8 @@ TODO:
 */
 #include <string>
 #include <iostream>
+#include <vector>
+#include <iomanip>
 using namespace std;
 class Inventory{
   private:
@@ -26,9 +28,11 @@ class Inventory{
     }
     void setQuantity(int quantity) {
       if (quantity >= 0) _quantity = quantity;
+      else _quantity = 0;
     }
     void setCost(double cost) {
       if (cost >= 0) _cost = cost;
+      else _cost = 0;
     }
     void setItemDescription(string itemDescription) {
       _itemDescription = itemDescription;
@@ -36,7 +40,9 @@ class Inventory{
 
   public:
     //Constructor
-    Inventory(int itemNumber=0, int quantity=0, double cost=0) {
+    Inventory(string itemDescription="noName",
+	    int itemNumber=0, int quantity=0, double cost=0) {
+      setItemDescription(itemDescription);
       setItemNumber(itemNumber);
       setQuantity(quantity);
       setCost(cost);
@@ -52,19 +58,21 @@ class Inventory{
     double getCost() const {
       return _cost;
     }
-    double getTotalCost() {
+    double getTotalCost() const {
       return _cost * _quantity;
     }
-    string getItemDescription() {
+    string getItemDescription() const {
       return _itemDescription;
     }
 };
 
 void inventoryDriver_ouput(Inventory& thing) {
-  cout << thing.getItemNumber() << endl
-       << thing.getQuantity() << endl
-       << thing.getCost() << endl
-       << thing.getTotalCost() << endl;
+  cout << setprecision(2) << fixed
+       << "Item Description: " << thing.getItemDescription() << endl
+       << "Item Number: " << thing.getItemNumber() << endl
+       << "Quantity: " << thing.getQuantity() << endl
+       << "Individual Cost: " << thing.getCost() << endl
+       << "Item(s) Total Cost: " << thing.getTotalCost() << endl;
 }
 
 int get_input(string prompt) {  
@@ -83,10 +91,30 @@ int get_input(string prompt) {
 }
 
 void inventoryDriver() {
-    int itemCount = get_input("Number of items in inventory: ");
+  //Test Items
+  Inventory item0 = Inventory();
+  Inventory item1 = Inventory("bananas", 42, 8, 0.244);
+  Inventory item2 = Inventory("skillet", 101, 1, 34.99);
+  Inventory item3 = Inventory("Bad Item", 666, -15, -6.6666);
+  Inventory item4 = Inventory("Tabloid", 121, 3, 11.306);
+
+  Inventory invItems[5] = {item0, item1, item2, item3, item4};
+  double totalCost = 0;
+  
+  int itemCount = get_input("Number of items in inventory: ");
+  for(int i = 0; i < itemCount; i++) {
+    inventoryDriver_ouput(invItems[i]);
+    totalCost += invItems[i].getTotalCost();
+    cout << endl;
+  }
+
+  cout << "Total cost of all items: $"
+       << setprecision(2) << fixed << totalCost << endl;
+      
 }
 
 
 int main() { 
+  inventoryDriver();
   return 0;
 }
