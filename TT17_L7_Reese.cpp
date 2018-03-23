@@ -1,15 +1,6 @@
 // Author: Lee Reese;  Course: COSC 1337 Spring 2018 TT17;  Instructor: Thayer
-// Lab: 6  Purpose: 
+// Lab: 6  Purpose: Create a class and test it by creating a driver
 
-/*
-TODO:
--Add purpose
--Test code on a windows machine with devcpp
-
-
-
-
-*/
 #include <string>
 #include <iostream>
 #include <vector>
