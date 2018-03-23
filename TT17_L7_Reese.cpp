@@ -17,6 +17,7 @@ TODO:
 using namespace std;
 class Inventory{
   private:
+    //Attributes
     int _itemNumber;
     int _quantity;
     double _cost;
@@ -66,54 +67,75 @@ class Inventory{
     }
 };
 
+//Standardized output for testing
 void inventoryDriver_ouput(Inventory& thing) {
   cout << setprecision(2) << fixed
        << "Item Description: " << thing.getItemDescription() << endl
        << "Item Number: " << thing.getItemNumber() << endl
        << "Quantity: " << thing.getQuantity() << endl
-       << "Individual Cost: " << thing.getCost() << endl
-       << "Item(s) Total Cost: " << thing.getTotalCost() << endl;
+       << "Individual Cost: $" << thing.getCost() << endl
+       << "Item(s) Total Cost: $" << thing.getTotalCost() << endl;
 }
 
-int get_input(string prompt) {  
-  int itemCount{};
+//For ensuring that numeric input is valid 
+double get_input(string prompt) {  
+  double number{};
   cout << prompt;
   
-  //Ensure input is an int
-  while (!(cin >> itemCount)) {
+  //Ensure input is a number
+  while (!(cin >> number)) {
     cout << "Value must be an integer." << endl;
     cin.clear();
     cin.ignore(255, '\n');
     cout << prompt; 
   }
+  return number;
+}
 
-  return itemCount;
+Inventory buildInventory() {
+  //Gather desired attributes
+  cout << "Item Description: ";
+  string itemDescription;
+  cin >> itemDescription;
+
+  int itemNumber = get_input("Item Number: ");
+
+  int quantity = int(get_input("Quantity: "));
+
+  double cost = get_input("Cost: $");
+
+  //Create inventory to spec and return
+  Inventory item = Inventory(itemDescription, itemNumber, quantity, cost);
+  return item;
 }
 
 void inventoryDriver() {
-  //Test Items
-  Inventory item0 = Inventory();
-  Inventory item1 = Inventory("bananas", 42, 8, 0.244);
-  Inventory item2 = Inventory("skillet", 101, 1, 34.99);
-  Inventory item3 = Inventory("Bad Item", 666, -15, -6.6666);
-  Inventory item4 = Inventory("Tabloid", 121, 3, 11.306);
+  //Container for test Inventory items
+  vector<Inventory> items;
 
-  Inventory invItems[5] = {item0, item1, item2, item3, item4};
-  double totalCost = 0;
-  
+  //Loop to create the Inventory(s)
   int itemCount = get_input("Number of items in inventory: ");
-  for(int i = 0; i < itemCount; i++) {
-    inventoryDriver_ouput(invItems[i]);
-    totalCost += invItems[i].getTotalCost();
+  cout << "Please describe the items for testing:" << endl;
+  for (int i = 0; i < itemCount; i++) {
+    items.push_back(buildInventory());
     cout << endl;
   }
 
+  //Display inventories and calculate total cost of all instances
+  double totalCost = 0;
+  for (Inventory &item : items) {
+    cout << endl;
+    inventoryDriver_ouput(item);
+    totalCost += item.getTotalCost();
+  }
+
+  //Display total cost
   cout << "Total cost of all items: $"
        << setprecision(2) << fixed << totalCost << endl;
       
 }
 
-
+//Main
 int main() { 
   inventoryDriver();
   return 0;
