@@ -1,0 +1,29 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fnil\fcharset0 HelveticaNeue;\f2\fmodern\fcharset0 CourierNewPSMT;
+}
+{\colortbl;\red255\green255\blue255;\red14\green14\blue14;\red255\green255\blue255;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\cssrgb\c6667\c6667\c6667;\cssrgb\c100000\c100000\c100000;\cssrgb\c0\c0\c0;
+}
+\margl1440\margr1440\vieww13760\viewh22280\viewkind0
+\deftab720
+\pard\pardeftab720\sl360\sa200\partightenfactor0
+
+\f0\fs32 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 This lab is based on "Using Files - Population Bar Chart" at the end of Chapter 5. This is on page 303\'a0Programming Challenge 23\'a0(7ed); or page 322\'a0Programming\'a0 Challenge 25 (8ed); or on page 322 Programming Challenge 27 (9ed).\'a0
+\b In this lab, you must read the data from a file.
+\b0 \cb1 \uc0\u8232 \u8232 \cb3 The input data file: people.txt is attached above. It can also be found under Publisher Source, Chapter 5 (called people.dat) or, you can just make the data file with a text editor. This small file contains the numbers: 2000 \'a04000 \'a05000 \'a09000 \'a014000 \'a018000. Use the filename: people.txt, because Windows is set up to easily display and edit files with the .txt extension.\cb1 \uc0\u8232 \u8232 \cb3 You program can assume: 1) population numbers start for the year 1900; 2) population counts are provided in 20 year increments; 3) there are 5 population counts provided. To start out with working code which does most of what you need to read data from a file, see: "Program Samples",\'a0
+\f1\b \cf4 \strokec4 Simple FileIO.\'a0
+\f0\b0 \cf2 \strokec2 This provides a complete, working FileIO example.\cb1 \uc0\u8232 \u8232 \cb3 1) Read the file people.txt and use the data to create a bar chart showing population growth (max 16 points).\cb1 \uc0\u8232 \cb3 2) Make the program more flexible: read population values from the file until end-of-file (instead of 5 times). This allow for more or fewer population data counts in the file. For example, it should also work if extra population values added for years 2020, 2040. (max 20 points).
+\f1\fs20 \
+
+\f0\fs32 Example output: (bar chart)\cb1 \uc0\u8232 
+\f2 \cb3 1900 **\cb1 \uc0\u8232 \cb3 1920 ****\cb1 \uc0\u8232 \cb3 1940 *****\cb1 \uc0\u8232 \cb3 1960 ***\cb1 \uc0\u8232 \cb3 1980 *******\cb1 \uc0\u8232 \cb3 2000 ********\cb1 \uc0\u8232 \cb3 2020 ************\cb1 \uc0\u8232 \cb3 2040 **********
+\f0 \cb1 \uc0\u8232 
+\f1\fs20 \cb3 \
+
+\f0\fs32 \cb1 \uc0\u8232 \cb3 Extra credit: Produce a column chart rather than a bar chart. That is, put the years along the bottom row, and have columns going up from the year. Make the column 2 stars wide centered over the year (max 22 points).\cb1 \uc0\u8232 \u8232 \cb3 For a nicer column chart, include data markers: year values along the x-axis AND population values along the y-axis (max 24 points).\cb1 \uc0\u8232 \u8232 \cb3 Extra credit example output: (column chart with data markers)\cb1 \uc0\u8232 \u8232 
+\f2 \cb3 12000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 11000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 10000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a09000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a08000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a07000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a06000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a05000\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a04000\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a03000\'a0\'a0\'a0\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a02000 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a01000 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\'a0\'a0\'a0 **\cb1 \uc0\u8232 \cb3 \'a0\'a0\'a0\'a0 1900\'a0 1920\'a0 1940\'a0 1960\'a0 1980\'a0 2000\'a0 2020\'a0 2040
+\f0 \cb1 \uc0\u8232 \u8232 \cb3 Use the file naming convention: DDHH_L5_lastname.cpp (replace the DDHH with your course designator and lastname with your last name) before you submit it.
+\f1\fs20 \
+}
