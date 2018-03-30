@@ -3,7 +3,7 @@
 
 /*
 TODO:
-
+-Diag victory
 
 
 
@@ -55,6 +55,11 @@ class Board {
 	  _board[row][col] = ' ';
       _remainingMoves = pow(_boardDimension, 2);
     }
+
+    //Getters
+    const int getRemainingMoves() {
+      return _remainingMoves;
+    }
   
     char isWinner(char player) {
       //Vertical Victory
@@ -82,9 +87,10 @@ class Board {
       if (_remainingMoves <= 0)
 	return;
 
-      //Place cahr player appropriate char at the desired possition
+      //Place char player at the desired possition
       int row; int col;
       if (getCoordinate(row, col, position)) {
+	cout << "success" << endl;
 	_board[row][col] = player;
 	subtractMove();
       }
@@ -114,8 +120,48 @@ class Board {
     }
 };
 
+void printBoardMap() {
+  cout << " 0 | 1 | 2 \n"
+       << "-----------\n"
+       << " 3 | 4 | 5 \n"
+       << "-----------\n"
+       << " 6 | 7 | 8 \n";
+}
+
+double getInput(string prompt) {  
+  double number{};
+  cout << prompt;
+  
+  //Ensure input is a number
+  while (!(cin >> number)) {
+    cout << "Value must be an integer." << endl;
+    cin.clear();
+    cin.ignore(255, '\n');
+    cout << prompt; 
+  }
+  return number;
+}
+
 int main() {
   Board gameBoard = Board();
+
+  while (gameBoard.getRemainingMoves() > 0) {
+    cout << "Remaining Moves: " << gameBoard.getRemainingMoves() << endl;
+    
+    char player = (gameBoard.getRemainingMoves()%2 == 0? 'O' : 'X' );
+    
+    //Prompt
+    printBoardMap();
+    stringstream prompt;
+    prompt << "Make your move player "
+	   << player << ": ";
+    int choice = static_cast<int>(getInput(prompt.str()));
+    cout << "Choice : " << choice << endl;
+    gameBoard.makeMove(choice, player);
+    gameBoard.toString();  
+  }
+
+  
   gameBoard.makeMove('X', 0);
   gameBoard.makeMove('X', 3);
   gameBoard.makeMove('X', 6);
