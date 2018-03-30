@@ -3,7 +3,6 @@
 
 /*
 TODO:
--Diag victory
 
 
 
@@ -19,10 +18,10 @@ class Board {
 
   private:
     //Attributes
-  char _board[3][3];
+    char _board[3][3];
       
     int _remainingMoves;
-    const int _boardDimension = 3;
+    int _boardDimension;
 
     //setters
     void subtractMove() {
@@ -36,22 +35,18 @@ class Board {
       if (pow(_boardDimension, 2) <= position || 0 > position)
 	return false;
 
-      //Decode position int ocoordinates
+      //Decode position into coordinates
       row = position / _boardDimension;
       col = position % _boardDimension;
       return true;
-    }
-
-    //Builds a square board with side length boardDimension
-    void constructBoard(int boardDimension) {
-      
     }
   
   public:
     //Constructor
     Board() {
-      for (int col = 0; col < _boardDimension; col++)
-	for (int row = 0; row < _boardDimension; row++)
+      _boardDimension = 3;
+      for (int row = 0; row < _boardDimension; row++)
+	for (int col = 0; col < _boardDimension; col++)
 	  _board[row][col] = ' ';
       _remainingMoves = pow(_boardDimension, 2);
     }
@@ -60,8 +55,30 @@ class Board {
     const int getRemainingMoves() {
       return _remainingMoves;
     }
-  
-    char isWinner(char player) {
+
+    //Determines if there is a diagonal winner (helper for isWinner())
+    bool isWinnerDiag(char& player, int col_init, bool down) {
+      int row = 0; int col = col_init;
+      while (row < 3) {
+	if (_board[row][col] != player)
+	  break;
+	if (row == _boardDimension-1)
+	  return true;
+	
+	//Move forward
+	row++;
+	
+	//Move down (++) or up (--)
+	if (down)
+	  col++;
+	else
+	  col--;
+      }
+      return false;
+    }
+
+    //Determines if there is a winner
+    bool isWinner(char player) {
       //Vertical Victory
       for (int col = 0; col < _boardDimension; col++)
 	for (int row = 0; row < _boardDimension; row++) {
@@ -69,7 +86,7 @@ class Board {
 	    break;
 	  if (row == _boardDimension-1)
 	    return true;
-      }
+	}
 
       //Horizontal Victory
       for (int row = 0; row < _boardDimension; row++)
@@ -78,22 +95,48 @@ class Board {
 	    break;
 	  if (col == _boardDimension-1)
 	    return true;
-      }
+	}
+
+      //Diagonal Victory
+      if (isWinnerDiag(player, 0, true))
+	return true;
+      if (isWinnerDiag(player, 2, false))
+	return true;
+
+      //No Victory
       return false;
     }
 
-    void makeMove(char player, int position) {
+    bool gameOver(char& winner) {
+      if (isWinner('X')) {
+	winner = 'X';
+	return true;
+      }
+      if (isWinner('O')) {
+	winner = 'O';
+	return true;
+      }
+      if (_remainingMoves <= 0)
+	return true;
+      return false;
+      
+    }
+
+    bool makeMove(char player, int position) {
       //Only make a move if possible
       if (_remainingMoves <= 0)
-	return;
+	return false;
 
       //Place char player at the desired possition
       int row; int col;
       if (getCoordinate(row, col, position)) {
-	cout << "success" << endl;
+	//Ensure space is empty
+	if (_board[row][col] != ' ')
+	  return false;
 	_board[row][col] = player;
 	subtractMove();
       }
+      return true;
     }
       
     string toString() {
@@ -112,7 +155,7 @@ class Board {
 	  }
 	}
 	ss << endl;
-	//Horizontal Line (if appropriate)
+	//Horizontal Line (or not)
 	if (row != _boardDimension-1)
 	  ss << "-----------" << endl;
       }
@@ -143,29 +186,55 @@ double getInput(string prompt) {
 }
 
 int main() {
-  Board gameBoard = Board();
+  bool playAgain = true;
+  while (playAgain) {
+    Board gameBoard = Board();
+    bool gameOver = false;
 
-  while (gameBoard.getRemainingMoves() > 0) {
-    cout << "Remaining Moves: " << gameBoard.getRemainingMoves() << endl;
+    while (gameOver == false) {
+      cout << endl
+	   << "Remaining Moves: " << gameBoard.getRemainingMoves() << endl;
     
-    char player = (gameBoard.getRemainingMoves()%2 == 0? 'O' : 'X' );
+      char player = (gameBoard.getRemainingMoves()%2 == 0? 'O' : 'X' );
     
-    //Prompt
-    printBoardMap();
-    stringstream prompt;
-    prompt << "Make your move player "
-	   << player << ": ";
-    int choice = static_cast<int>(getInput(prompt.str()));
-    cout << "Choice : " << choice << endl;
-    gameBoard.makeMove(choice, player);
-    gameBoard.toString();  
+      //Prompt
+      cout << gameBoard.toString();
+      stringstream prompt;
+      prompt << "Make your move player "
+	     << player << ": ";
+      int choice = static_cast<int>(getInput(prompt.str()));
+      
+      //Make Move
+      if (!gameBoard.makeMove(player, choice)) {
+	cout << "Bad move. Please choose a number between 0 and 8." << endl
+	     << "Additionally, you may not occupy an already occupied space."
+	     << endl;
+      }
+
+      //Check for a game over
+      char winner = ' ';
+      if (gameBoard.gameOver(winner)) {
+	gameOver = true;
+	cout << "\nGame Over!" << endl;
+
+	//Cat's Game
+	if (winner == ' ')
+	  cout << "It's a cat's game. You both lose!" << endl;
+	
+	//Winner
+	else
+	  cout << "Player " << winner << " has won!"
+	       << " Congratulations!" << endl;
+      }
+      //end of game loop
+    }
+    
+    //Would user like to play again
+    cout << "Would you like to play again? (y/n): ";
+    char choice;
+    cin >> choice;
+    if (choice != 'y')
+      playAgain = false;
   }
-
-  
-  gameBoard.makeMove('X', 0);
-  gameBoard.makeMove('X', 3);
-  gameBoard.makeMove('X', 6);
-  cout << gameBoard.toString();
-  if(gameBoard.isWinner('X')) cout << "X wins\n";
   return 0;
 }
