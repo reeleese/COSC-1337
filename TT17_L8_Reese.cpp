@@ -56,53 +56,70 @@ class Board {
       _remainingMoves = pow(_boardDimension, 2);
     }
   
-    //Determine the current winner
-    char winner() {
-      
+    char isWinner(char player) {
+      //Vertical Victory
+      for (int col = 0; col < _boardDimension; col++)
+	for (int row = 0; row < _boardDimension; row++) {
+	  if (_board[row][col] != player)
+	    break;
+	  if (row == _boardDimension-1)
+	    return true;
+      }
+
+      //Horizontal Victory
+      for (int row = 0; row < _boardDimension; row++)
+	for (int col = 0; col < _boardDimension; col++) {
+	  if (_board[row][col] != player)
+	    break;
+	  if (col == _boardDimension-1)
+	    return true;
+      }
+      return false;
     }
 
-    //Place an 'X' or an 'O'
     void makeMove(char player, int position) {
       //Only make a move if possible
       if (_remainingMoves <= 0)
 	return;
 
-      //Place appropriate char at the desired possition
+      //Place cahr player appropriate char at the desired possition
       int row; int col;
       if (getCoordinate(row, col, position)) {
 	_board[row][col] = player;
 	subtractMove();
       }
     }
-
-    //Convert Board to a string
+      
     string toString() {
       stringstream ss;
       for (int row = 0; row < _boardDimension; row++){
 	for (int col = 0; col < _boardDimension; col++){
+	  
+	  //Draw tiles with vertical lines
 	  switch (col) {
-	    case 0: case 2 :
-	      ss << " " << _board[row][col] << " ";
-	      break;
-	    case 1 :
-	      ss << "| " << _board[row][col] << " |";
-	      break;
-	    
+	    case 0 :
+	    case 2 : ss << " " << _board[row][col] << " ";
+	             break;
+            case 1 : ss << "| " << _board[row][col] << " |";
+	             break;
+  	  default :  break;
 	  }
 	}
 	ss << endl;
+	//Horizontal Line (if appropriate)
 	if (row != _boardDimension-1)
 	  ss << "-----------" << endl;
       }
-	
       return ss.str();
     }
 };
 
 int main() {
   Board gameBoard = Board();
-  gameBoard.makeMove('X', 2);
-  gameBoard.makeMove('O', 4);
+  gameBoard.makeMove('X', 0);
+  gameBoard.makeMove('X', 3);
+  gameBoard.makeMove('X', 6);
   cout << gameBoard.toString();
+  if(gameBoard.isWinner('X')) cout << "X wins\n";
   return 0;
 }
