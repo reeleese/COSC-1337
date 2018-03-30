@@ -1,17 +1,12 @@
 // Author: Lee Reese;  Course: COSC 1337 Spring 2018 TT17;  Instructor: Thayer
 // Lab: 8  Purpose: Tic-Tac-Toe Game
 
-/*
-TODO:
-
-
-
-*/
 
 #include<iostream>
 #include<string>
 #include<cmath>
 #include<sstream>
+#include<stdio.h>
 
 using namespace std;
 class Board {
@@ -163,14 +158,6 @@ class Board {
     }
 };
 
-void printBoardMap() {
-  cout << " 0 | 1 | 2 \n"
-       << "-----------\n"
-       << " 3 | 4 | 5 \n"
-       << "-----------\n"
-       << " 6 | 7 | 8 \n";
-}
-
 double getInput(string prompt) {  
   double number{};
   cout << prompt;
@@ -187,6 +174,10 @@ double getInput(string prompt) {
 
 int main() {
   bool playAgain = true;
+  double winsX = 0;
+  double winsY = 0;
+  double winsCat = 0;
+  
   while (playAgain) {
     Board gameBoard = Board();
     bool gameOver = false;
@@ -218,23 +209,49 @@ int main() {
 	cout << "\nGame Over!" << endl;
 
 	//Cat's Game
-	if (winner == ' ')
+	if (winner == ' ') {
+	  //Statistics
+	  winsCat++;
+	  //Message
 	  cout << "It's a cat's game. You both lose!" << endl;
+	}
 	
-	//Winner
+	//Somebody is a winner
 	else
+	  //Statitistics
+	  if (winner == 'X')
+	    winsX++;
+	  else if (winner == 'Y')
+	    winsY++;
+	
+	  //Congratulatory message
 	  cout << "Player " << winner << " has won!"
 	       << " Congratulations!" << endl;
       }
-      //end of game loop
     }
-    
     //Would user like to play again
     cout << "Would you like to play again? (y/n): ";
     char choice;
     cin >> choice;
     if (choice != 'y')
       playAgain = false;
-  }
+}
+  
+
+  winsX = 10;
+  winsY = 10;
+  winsCat = 10;
+  //Statistics Calculations
+  double totalGames = winsX + winsY + winsCat;
+  cout << "totl games" << totalGames << endl;
+  double percentX = winsX * 100 / totalGames;
+  double percentY = winsX * 100 / totalGames;
+  double percentCat = winsX * 100 / totalGames;
+  
+  //Statistics Output
+  printf("Percentage of games won by X: %0.2f%%\n" , percentX);
+  printf("Percentage of games won by Y: %0.2f%%\n" , percentY);
+  printf("Percentage cat's games: %0.2f%%\n" , percentCat);
+  
   return 0;
 }
