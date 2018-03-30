@@ -19,13 +19,9 @@ class Board {
 
   private:
     //Attributes
-    char _board[3][3] =
-      {
-	{' ', ' ', ' '},
-	{' ', ' ', ' '},
-	{' ', ' ', ' '}
-      };
-    int _remainingMoves = 9;
+  char _board[3][3];
+      
+    int _remainingMoves;
     const int _boardDimension = 3;
 
     //setters
@@ -54,8 +50,12 @@ class Board {
   public:
     //Constructor
     Board() {
-      //Do nothing
+      for (int col = 0; col < _boardDimension; col++)
+	for (int row = 0; row < _boardDimension; row++)
+	  _board[row][col] = ' ';
+      _remainingMoves = pow(_boardDimension, 2);
     }
+  
     //Determine the current winner
     char winner() {
       
@@ -69,28 +69,40 @@ class Board {
 
       //Place appropriate char at the desired possition
       int row; int col;
-      if (getCoordinate(row, col, position))
+      if (getCoordinate(row, col, position)) {
 	_board[row][col] = player;
+	subtractMove();
+      }
     }
 
     //Convert Board to a string
     string toString() {
       stringstream ss;
-      int i = 0;
-      while(i < pow(_boardDimension, 2)) {
-	ss << "  " << i++
-	   << "| " << i++ << " |"
-	   << i++ << "  "
-	   << endl;
-	if (i != pow(_boardDimension, 2)) 
-	  ss << "------------" << endl;
+      for (int row = 0; row < _boardDimension; row++){
+	for (int col = 0; col < _boardDimension; col++){
+	  switch (col) {
+	    case 0: case 2 :
+	      ss << " " << _board[row][col] << " ";
+	      break;
+	    case 1 :
+	      ss << "| " << _board[row][col] << " |";
+	      break;
+	    
+	  }
+	}
+	ss << endl;
+	if (row != _boardDimension-1)
+	  ss << "-----------" << endl;
       }
+	
       return ss.str();
     }
 };
 
 int main() {
   Board gameBoard = Board();
+  gameBoard.makeMove('X', 2);
+  gameBoard.makeMove('O', 4);
   cout << gameBoard.toString();
   return 0;
 }
