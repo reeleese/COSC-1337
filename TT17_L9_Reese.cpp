@@ -145,10 +145,11 @@ int main () {
   return 0;
 } // end of main
 
-//////////////////////////////////////////////
-// Add your first sort algorithm in here
+//////////////////////////////////////
+//-------FIRST SORT ALGORITHM-------//
+//////////////////////////////////////
 
-// A helper function to get the largest value in the array
+// Returns the largest value in the array
 int getMax(int array[], int size) {
   int max = array[0];
 
@@ -158,32 +159,62 @@ int getMax(int array[], int size) {
   return max;
 }
 
-// A function to do a counting sort of the array acc ording to exp.
+// A function to do a counting sort of the array.
 // The elements of the array are sorted in ascending order based
-// on the value of the digit in the exp's place.
+// on the place value represented by exp.
 //
-// ex: If exp = 10, the digits will be sorted by the value of the 10's
+// e.g. If exp = 10, the digits will be sorted by the value of the 10's
 // place. (902 < 713 < 836 = 133)
 
 void countSort(int array[], int size, int exp) {
   int output[size];
   int i, count[10] = {0};
+  
+  // Note: (array[i]/exp) % 10 returns the digit in the exp's place of array[i]
 
-    for (i = 0; i < size; i++)
+  // Store number of occurences for each digit [0-9] in count.
+  // e.g. If array[3] == 4, then there are for numbers in array[] with a 3
+  // in the exp's place
+  for (i = 0; i < size; i++)
     count[(array[i] / exp) % 10]++;
 
-    for (i = 1; i < size; i++)
+  // Change count[i] so that it will store the final position of the digit
+  // in output. (+1)
+  // e.g. If count[3] == 4, output[4-1] will contain the final occurence of
+  // a '3' value in array[i]. This makes more sense when you see the next loop
+  for (i = 1; i < size; i++)
     count[i] += count[i-1];
 
-    for(i = size-1; i >= 0; i--) {
-      output[count[(array[i]/exp) % 10] -1] = array[i];
+  // Build the output array. We traverse array[] backwards to ensure the sort
+  // is stable.
+  for(i = size-1; i >= 0; i--) {
 
+    // We go to the final position for array[i] specified by count 
+    output[count[(array[i]/exp) % 10] -1] = array[i];
+
+    // Decrement count so that future numbers with equal value will
+    // go to the previous position
     count[(array[i]/exp) % 10]--;
   }
 
   // Copy output[] to array[]
   for (int i = 0; i < size; i++)
     array[i] = output[i];
+}
+
+// This is an LSD Radix Sort. LSD means "Least Significant Digit.
+// That is, we begin our sort by focusing on the least significant
+// digit and move towards the most significant digit with our repeating
+// count sorts.
+void radixSort(int array[], int size) {
+  int max = getMax(array, size);
+
+  // We stop at when m/xp = 0 because this is when our exp's place is
+  // of a greater place value than the MSD of max.
+  // exp *= 10 moves us from the 1's place to the 10's place to the
+  // 100's place...
+  for (int exp = 1; max/exp > 0; exp *= 10)
+    countSort(array, size, exp);
 }
 
 // Add your second sort algorithm in here
