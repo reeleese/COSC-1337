@@ -147,6 +147,45 @@ int main () {
 
 //////////////////////////////////////////////
 // Add your first sort algorithm in here
+
+// A helper function to get the largest value in the array
+int getMax(int array[], int size) {
+  int max = array[0];
+
+  for (int i = 1; i < size; i++)
+    if (array[i] > max)
+      max = array[i];
+  return max;
+}
+
+// A function to do a counting sort of the array acc ording to exp.
+// The elements of the array are sorted in ascending order based
+// on the value of the digit in the exp's place.
+//
+// ex: If exp = 10, the digits will be sorted by the value of the 10's
+// place. (902 < 713 < 836 = 133)
+
+void countSort(int array[], int size, int exp) {
+  int output[size];
+  int i, count[10] = {0};
+
+    for (i = 0; i < size; i++)
+    count[(array[i] / exp) % 10]++;
+
+    for (i = 1; i < size; i++)
+    count[i] += count[i-1];
+
+    for(i = size-1; i >= 0; i--) {
+      output[count[(array[i]/exp) % 10] -1] = array[i];
+
+    count[(array[i]/exp) % 10]--;
+  }
+
+  // Copy output[] to array[]
+  for (int i = 0; i < size; i++)
+    array[i] = output[i];
+}
+
 // Add your second sort algorithm in here
 // Add your search algorithm in here
 //////////////////////////////////////////////
