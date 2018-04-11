@@ -267,6 +267,30 @@ void heapSort(int array[], int size) {
 //-------SEARCH ALGORITHM-------//
 //////////////////////////////////
 
+bool binarySearchArray(int array[], int left, int right, int searchTerm, int &index) {
+  if (right >= left) {
+    //The middle of the subsection bounded by left and right
+    int mid = left + (right - left)/2;
+
+    //If we found searchTerm at mid
+    if (array[mid] == searchTerm) {
+      index = mid;
+      return true;
+    }
+
+    // If searchTerm < mid, it can only be in the left subsection...
+    if (array[mid] > searchTerm)
+      return binarySearchArray(array, left, mid-1, searchTerm, index);
+
+    // Else, searchTerm can only be in the right subsection.
+    return binarySearchArray(array, mid +1, right, searchTerm, index);
+  }
+
+  //This point is reached only when searchTerm is not present
+  index = -1;
+  return false;
+}
+
 void showArray(int array[], int size) {
   for (int count = 0; count < size; count++)
     cout << setw(2) << array[count] << ' ';
