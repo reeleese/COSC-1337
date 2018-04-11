@@ -110,8 +110,20 @@ void testAlgorithms(int array[], int arraySize) {
   cout << endl;
   
   // Add a loop to call and test your first sort algorithm here
+  cout << endl << setw (AlgorithmNameWidth) << left << "radix sort (LSD)";
+  for (int testCount=0; (testSizes[testCount] && testSizes[testCount] <= arraySize); ++testCount)
+    cout << setw(DurationWidth) << right << testSortAlgorithm(radixSort, array, testSizes[testCount]);
+    
   // Add a loop to call and test your second sort algorithm here
+  cout << endl << setw (AlgorithmNameWidth) << left << "heap sort";
+  for (int testCount=0; (testSizes[testCount] && testSizes[testCount] <= arraySize); ++testCount)
+    cout << setw(DurationWidth) << right << testSortAlgorithm(heapSort, array, testSizes[testCount]);
+    
   // Add a loop to call and test your search algorithm here
+  cout << endl << setw (AlgorithmNameWidth) << left << "binary search";
+  for (int testCount=0; (testSizes[testCount] && testSizes[testCount] <= arraySize); ++testCount)
+    cout << setw(DurationWidth) << right << testBinarySearch(array, testSizes[testCount]);
+  cout << endl;
 }
 
 // Useful test to verify that array is really sorted!
