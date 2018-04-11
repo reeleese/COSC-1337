@@ -217,9 +217,55 @@ void radixSort(int array[], int size) {
     countSort(array, size, exp);
 }
 
-// Add your second sort algorithm in here
-// Add your search algorithm in here
-//////////////////////////////////////////////
+///////////////////////////////////////
+//-------SECOND SORT ALGORITHM-------//
+///////////////////////////////////////
+
+// Turns a binary tree with a root of node into a max heap. End is the size
+// of the heap. (Note: As a result, array[end] and elements beyond are not
+// re-ordered or compared.)
+void heapify(int array[], int end, int node) {
+  int largest = node;       // To begin, largest will be the root
+  int left = node * 2 + 1;
+  int right = node * 2 + 2;
+
+  // Determine if node is less than either of it's children
+  if (left < end && array[left] > array[largest])
+    largest = left;
+  if (right < end && array[right] > array[largest])
+    largest = right;
+  
+  // If node is less than a child, swap node and child.
+  //  Then, recursively call heapify on the child.
+  if (largest != node) {
+    swap(array[node], array[largest]);
+    heapify(array, end, largest);
+  }
+}
+
+void heapSort(int array[], int size) {
+
+  // First, turn the array into a max heap. By starting with size /2 -1,
+  // The resulting heapify will start at the least significant node. The
+  // loop will work it's way up until the root is array[0].
+  for (int i = size/2 -1; i >= 0; i--)
+    heapify(array, size, i);
+
+  // Create the final array. Sorted in ascending order
+  for (int end = size -1; end >= 0; end--){
+    // Move the current root to end. This builds our sorted
+    // array from back to front
+    swap(array[0], array[end]);
+
+    // Create a max heap of the remaining elements.
+    //After this function call, array[0] will be the second largest
+    //element in array
+    heapify(array, end, 0);
+  }
+}
+//////////////////////////////////
+//-------SEARCH ALGORITHM-------//
+//////////////////////////////////
 
 void showArray(int array[], int size) {
   for (int count = 0; count < size; count++)
