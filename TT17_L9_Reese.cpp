@@ -78,11 +78,11 @@ float testBinarySearch(int array[], int arraySize) {
   bool found = false; // true if TARGET is found in array
   int foundAt = 0;    // index in array where TARGET was found
   int startTime = clock();
-  for (int repeat = 0; repeat < 1000; repeat++) // repeat test 1000 times to increase duration
+  for (int repeat = 0; repeat < 1000000; repeat++) // repeat test 1000 times to increase duration
     found = binarySearchArray(array, 0, arraySize-1, TARGET, foundAt); // ALGORITHM UNDER TEST
   int stopTime = clock();
   int duration = stopTime - startTime;
-  return duration/1000.0; // divide duration by 1000 to get time for single search
+  return duration/1000000.0; // divide duration by 1000000 to get time for single search
 }
 
 void testAlgorithms(int array[], int arraySize) {
@@ -143,16 +143,25 @@ int main () {
   // on a very small array. If so, uncomment the lines below.
   const int SMALLSIZE = 6;
   int smallArray[SMALLSIZE] = {5, 7, 2, 8, 9, 1}; // for testing purposes
- 
-  cout << "Optional testing of specific algorithms, prior to performance comparison table:\n\n";
+
+  // Test radix on smallArray
+  cout << "Testing radix sort, prior to performance comparison table:\n\n";
   cout << "UNSORTED smallArray is: "; showArray(smallArray, SMALLSIZE);
   if (!verifySorted(smallArray, SMALLSIZE)) cout<< "Note: smallArray not sorted.\n";
-  selectionSortDescribedShowProgress(smallArray, SMALLSIZE);
+  radixSort(smallArray, SMALLSIZE);
   cout << "SORTED   smallArray is: "; showArray(smallArray, SMALLSIZE);
   if (verifySorted(smallArray, SMALLSIZE)) cout<< "Note: smallArray is sorted.\n";
+  cout << endl;
 
-  // When first implementing your algorithm, you may want to test it
-  // on a very small array. If so, try it on smallArray below.
+  int otherSmallArray[SMALLSIZE] = {5, 7, 2, 8, 9, 1};
+  // Test heap on smallArray
+  cout << "Testing heap sort, prior to performance comparison table:\n\n";
+  cout << "UNSORTED smallArray is: "; showArray(otherSmallArray, SMALLSIZE);
+  if (!verifySorted(otherSmallArray, SMALLSIZE)) cout<< "Note: smallArray not sorted.\n";
+  heapSort(otherSmallArray, SMALLSIZE);
+  cout << "SORTED   smallArray is: "; showArray(otherSmallArray, SMALLSIZE);
+  if (verifySorted(otherSmallArray, SMALLSIZE)) cout<< "Note: smallArray is sorted.\n";
+  
 
   const int BIGSIZE = 50000;
   int bigArray[BIGSIZE];
@@ -166,6 +175,23 @@ int main () {
 
   duration = testLinearSearch(bigArray, BIGSIZE);
   cout << "Linear search  of bigArray took: "
+       << setw(7) << duration << " milliseconds.\n\n";
+
+  // Test Radix sort on bigArray
+  duration = testSortAlgorithm(radixSort, bigArray, BIGSIZE);
+  cout << fixed << setprecision(2);
+  cout << "Radix sort (LSD) on bigArray took: "
+       << setw(7) << duration << " milliseconds." << endl;
+
+  // Test Heap sort on bigArray
+  duration = testSortAlgorithm(heapSort, bigArray, BIGSIZE);
+  cout << fixed << setprecision(2);
+  cout << "Heap sort on bigArray took: "
+       << setw(7) << duration << " milliseconds." << endl;
+
+  //Test Binary search on bigArray
+  duration = testBinarySearch(bigArray, BIGSIZE);
+  cout << "Binary search  of bigArray took: "
        << setw(7) << duration << " milliseconds.\n\n";
 
   // Test the algorithms on ever longer list of numbers. Only one
@@ -209,13 +235,13 @@ void countSort(int array[], int size, int exp) {
   // e.g. If array[3] == 4, then there are for numbers in array[] with a 3
   // in the exp's place
   for (i = 0; i < size; i++)
-    count[(array[i] / exp) % 10]++;
+    count[ (array[i]/exp) % 10 ]++;
 
   // Change count[i] so that it will store the final position of the digit
   // in output. (+1)
   // e.g. If count[3] == 4, output[4-1] will contain the final occurence of
   // a '3' value in array[i]. This makes more sense when you see the next loop
-  for (i = 1; i < size; i++)
+  for (i = 1; i < 10; i++)
     count[i] += count[i-1];
 
   // Build the output array. We traverse array[] backwards to ensure the sort
@@ -435,39 +461,7 @@ void selectionSortConcise(int array[], int size) {
 }
 
 /*
-Optional testing of specific algorithms, prior to performance comparison table:
+Program Output:
 
-UNSORTED smallArray is:  5  7  2  8  9  1
-Note: smallArray not sorted.
-  previous min value: 5 at offset: 0; found smaller value: 2 at offset: 2
-  previous min value: 2 at offset: 2; found smaller value: 1 at offset: 5
-  swapped the previous minimum value: 5 with with new minimum value: 1
-After pass 0 the array looks like this:  1  7  2  8  9  5
 
-  previous min value: 7 at offset: 1; found smaller value: 2 at offset: 2
-  swapped the previous minimum value: 7 with with new minimum value: 2
-After pass 1 the array looks like this:  1  2  7  8  9  5
-
-  previous min value: 7 at offset: 2; found smaller value: 5 at offset: 5
-  swapped the previous minimum value: 7 with with new minimum value: 5
-After pass 2 the array looks like this:  1  2  5  8  9  7
-
-  previous min value: 8 at offset: 3; found smaller value: 7 at offset: 5
-  swapped the previous minimum value: 8 with with new minimum value: 7
-After pass 3 the array looks like this:  1  2  5  7  9  8
-
-  previous min value: 9 at offset: 4; found smaller value: 8 at offset: 5
-  swapped the previous minimum value: 9 with with new minimum value: 8
-After pass 4 the array looks like this:  1  2  5  7  8  9
-
-SORTED   smallArray is:  1  2  5  7  8  9
-Note: smallArray is sorted.
-
-Selection sort on bigArray took: 3264.00 milliseconds.
-Linear search  of bigArray took:    0.13 milliseconds.
-
-Algorithm             1000      5000     10000     20000     30000     40000     50000
-================   =======   =======   =======   =======   =======   =======   =======
-selection sort        2.00     33.00    131.00    523.00   1174.00   2088.00   3257.00
-linear search         0.00      0.01      0.03      0.05      0.08      0.10      0.13
 */
