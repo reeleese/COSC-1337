@@ -29,6 +29,12 @@ void selectionSortConcise(int[], int);
 
 bool linearSearchArray(int [], int, int, int&);
 
+// The stuff that I made
+void radixSort(int[], int);
+void heapSort(int[], int);
+bool binarySearchArray(int[], int, int, int, int&);
+
+
 const int testSizes[] = {1000, 5000, 10000, 20000, 30000, 40000, 50000, 0};
 
 // This code helps to automate multiple test runs.
@@ -59,6 +65,21 @@ float testLinearSearch(int array[], int arraySize) {
   int startTime = clock();
   for (int repeat = 0; repeat < 1000; repeat++) // repeat test 1000 times to increase duration
     found = linearSearchArray(array, arraySize, TARGET, foundAt); // ALGORITHM UNDER TEST
+  int stopTime = clock();
+  int duration = stopTime - startTime;
+  return duration/1000.0; // divide duration by 1000 to get time for single search
+}
+
+///////////////////////////////////////
+//-------SEARCH ALGORITHM TEST-------//
+///////////////////////////////////////
+
+float testBinarySearch(int array[], int arraySize) {
+  bool found = false; // true if TARGET is found in array
+  int foundAt = 0;    // index in array where TARGET was found
+  int startTime = clock();
+  for (int repeat = 0; repeat < 1000; repeat++) // repeat test 1000 times to increase duration
+    found = binarySearchArray(array, 0, arraySize-1, TARGET, foundAt); // ALGORITHM UNDER TEST
   int stopTime = clock();
   int duration = stopTime - startTime;
   return duration/1000.0; // divide duration by 1000 to get time for single search
