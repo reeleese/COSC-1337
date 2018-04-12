@@ -52,8 +52,8 @@ int main() {
 
   // Step 2) declare CoinPurse object called purse1;
   // initialize with: 4 quarters, 3 dimes, 2 nickels, 1 penny
-  CoinPurse purse = CoinPurse(4, 3, 2, 1);
-  cout << purse.total_value();
+  CoinPurse purse1 = CoinPurse(4, 3, 2, 1);
+  cout << '$' << static_cast<double>(purse1.total_value())/100;
 
   // Step 4) Call the total_value method on purse1; display the result formatted as: $x.xx
 
