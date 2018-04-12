@@ -16,19 +16,13 @@ class CoinPurse
   private:
     int _quarters, _dimes, _nickels, _pennies;
   public:
-  //  Step 1) Write two CoinPurse constructors:
-  //    default: set all coin counts to zero
-  //    2nd:     set all coin counts to initial values; use parameters for: penny, nickel, dime, quarter
-  //    please combine both of these into one constructor
-  
-  // Step 6) avoid redundant code, call set() in constructor(s)
-
-  CoinPurse(int quarters = 0, int dimes = 0, int nickels = 0, int pennies = 0) {
+    CoinPurse(int quarters=0, int dimes=0, int nickels=0, int pennies=0) {
     set(quarters, nickels, dimes, pennies);
   }
   
-  // Step 3) Write total_value to return total value of coins in CoinPurse object
-  int total_value() const; // return total cents as int // getters should be marked as const
+    int total_value() const {
+    return _quarters*25 + _dimes*10 + _nickels*5 + _pennies*1;
+  }
   
   bool set(int quarters, int dimes, int nickels, int pennies) {
     // If any values are negative, do nothing
