@@ -17,7 +17,7 @@ class CoinPurse
     int _quarters, _dimes, _nickels, _pennies;
   public:
     CoinPurse(int quarters=0, int dimes=0, int nickels=0, int pennies=0) {
-    set(quarters, nickels, dimes, pennies);
+      set(quarters, dimes, nickels, pennies);
   }
   
     int total_value() const {
@@ -52,6 +52,8 @@ int main() {
 
   // Step 2) declare CoinPurse object called purse1;
   // initialize with: 4 quarters, 3 dimes, 2 nickels, 1 penny
+  CoinPurse purse = CoinPurse(4, 3, 2, 1);
+  cout << purse.total_value();
 
   // Step 4) Call the total_value method on purse1; display the result formatted as: $x.xx
 
