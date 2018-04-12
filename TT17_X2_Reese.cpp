@@ -14,7 +14,7 @@ using namespace std;
 class CoinPurse
 {
   private:
-    int quarters, dimes, nickels, pennies;
+    int _quarters, _dimes, _nickels, _pennies;
   public:
   //  Step 1) Write two CoinPurse constructors:
   //    default: set all coin counts to zero
@@ -23,13 +23,25 @@ class CoinPurse
   
   // Step 6) avoid redundant code, call set() in constructor(s)
 
-  CoinPurse(int=0, int=0, int=0, int=0);
+  CoinPurse(int quarters = 0, int dimes = 0, int nickels = 0, int pennies = 0) {
+    set(quarters, nickels, dimes, pennies);
+  }
   
   // Step 3) Write total_value to return total value of coins in CoinPurse object
   int total_value() const; // return total cents as int // getters should be marked as const
   
-  // Step 5) Implement set() which modifies the coin counts
-  bool set(int, int, int, int);
+  bool set(int quarters, int dimes, int nickels, int pennies) {
+    // If any values are negative, do nothing
+    if (quarters <= 0 || dimes <= 0 || nickels <= 0 || pennies <= 0)
+      return false;
+
+    // Assign values iff given values are valid
+    _quarters = quarters;
+    _dimes = dimes;
+    _nickels = nickels;
+    _pennies = pennies;
+    return true;
+  }
   
   // Step 7) write show() method that outputs the number of each coin in the purse
   //  in one string, like this: "q=4 d=3 n=2 p=1" (don't << endl;)
