@@ -26,7 +26,7 @@ class CoinPurse
   
   bool set(int quarters, int dimes, int nickels, int pennies) {
     // If any values are negative, do nothing
-    if (quarters <= 0 || dimes <= 0 || nickels <= 0 || pennies <= 0)
+    if (quarters < 0 || dimes < 0 || nickels < 0 || pennies < 0)
       return false;
 
     // Assign values iff given values are valid
@@ -39,7 +39,12 @@ class CoinPurse
   
   // Step 7) write show() method that outputs the number of each coin in the purse
   //  in one string, like this: "q=4 d=3 n=2 p=1" (don't << endl;)
-  void show() const;
+  string show() const {
+    return "(q=" + to_string(_quarters) +
+           " d=" + to_string(_dimes) +
+           " n=" + to_string(_nickels) +
+	   " p=" + to_string(_pennies) + ")";
+  }
 
   // Step 9) write modify() method to modify coin counts using a positive (increment),
   // negative (decrement) or zero (keep the same) value.
@@ -53,7 +58,7 @@ int main() {
   // Step 2) declare CoinPurse object called purse1;
   // initialize with: 4 quarters, 3 dimes, 2 nickels, 1 penny
   CoinPurse purse1 = CoinPurse(4, 3, 2, 1);
-  cout << '$' << static_cast<double>(purse1.total_value())/100;
+  cout << '$' << static_cast<double>(purse1.total_value())/100 << purse1.show();
 
   // Step 4) Call the total_value method on purse1; display the result formatted as: $x.xx
 
