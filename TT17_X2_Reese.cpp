@@ -57,19 +57,18 @@ void get_input(int&);
 int main() {
   cout << "COSC 1337 Exam 2 CoinPurse" << endl;
 
-  // Step 2) declare CoinPurse object called purse1;
-  // initialize with: 4 quarters, 3 dimes, 2 nickels, 1 penny
   CoinPurse purse1 = CoinPurse(4, 3, 2, 1);
   cout << '$' << static_cast<double>(purse1.total_value())/100
        << endl;
   purse1.set(8, 7, 6, 5);
   cout << purse1.show() << endl;
-
+  
   // Menu-Driven loop
   bool done = false;
   while(!done) {
     // Display Menu and current sataus of purse1
-    cout << '$' << static_cast<double>(purse1.total_value())/100
+    cout << setprecision(2) << fixed
+         << '$' << static_cast<double>(purse1.total_value())/100
          << " " << purse1.show() << " "
          << "Modify p)enny n)ickel d)ime q)uarter s)top: ";
 
@@ -87,23 +86,53 @@ int main() {
       // Modify appropriate coins by delta
       const string error_message = "You may not have fewer than 0 of any coin!";
       switch (choice) {
-        case 'q' : if(!purse1.modify(delta, 0, 0, 0))
-	  cout << endl << error_message << endl;
-                   break;
+        case 'q' : { //quarters
+	  if(!purse1.modify(delta, 0, 0, 0))
+	    cout << endl << error_message << endl;
+	  break;
+	}
 
-        case 'd' : if(!purse1.modify(0, delta, 0, 0))
-                     cout << endl << error_message << endl;
-                   break;
+        case 'd' : { //dimes
+	  if(!purse1.modify(0, delta, 0, 0))
+	    cout << endl << error_message << endl;
+	  break;
+	}
 
-        case 'n' : if(!purse1.modify(0, 0, delta, 0))
-                     cout << endl <<error_message << endl;
-                   break;
+        case 'n' : { //nickels
+	  if(!purse1.modify(0, 0, delta, 0))
+	    cout << endl <<error_message << endl;
+	  break;
+	}
 
-        case 'p' : if(!purse1.modify(0, 0, 0, delta))
-                     cout << endl << error_message << endl;
-                   break;
+       case 'p' : { //pennies
+	  if(!purse1.modify(0, 0, 0, delta))
+	    cout << endl << error_message << endl;
+	  break;
+        }
+	
+        case 'c' : { //cents
+	  int cents = delta;
 
-        default : cout << "Invalid option.";
+	  // Get required no. of each coin type
+	  int quarters = cents / 25;
+	  cents %= 25;
+
+	  int dimes = cents / 10;
+	  cents %= 10;
+
+	  int nickels = cents / 5;
+	  cents %= 5;
+
+	  int pennies = cents;
+
+	  //Call a modify as we normally would
+	  if(!purse1.modify(quarters, dimes, nickels, pennies))
+	    cout << endl <<error_message << endl;
+	  break;
+	}
+        default : {
+	  cout << "Invalid option.";
+	}
       }
     }
   }
@@ -115,7 +144,7 @@ int main() {
 }
 
 void get_input(int& option) {  
-  if (!(cin >> option)) {
+  while (!(cin >> option)) {
     cin.clear();
     cout << "Value must be an integer.";
   }
