@@ -87,55 +87,53 @@ int main() {
       const string error_message = "You may not have fewer than 0 of any coin!";
       switch (choice) {
         case 'q' : { //quarters
-	  if(!purse1.modify(delta, 0, 0, 0))
-	    cout << endl << error_message << endl;
-	  break;
-	}
+          if(!purse1.modify(delta, 0, 0, 0))
+            cout << endl << error_message << endl;
+          break;
+        }
 
         case 'd' : { //dimes
-	  if(!purse1.modify(0, delta, 0, 0))
-	    cout << endl << error_message << endl;
-	  break;
-	}
+          if(!purse1.modify(0, delta, 0, 0))
+            cout << endl << error_message << endl;
+         break;
+        }
 
         case 'n' : { //nickels
-	  if(!purse1.modify(0, 0, delta, 0))
-	    cout << endl <<error_message << endl;
-	  break;
-	}
+          if(!purse1.modify(0, 0, delta, 0))
+            cout << endl <<error_message << endl;
+          break;
+       }
 
        case 'p' : { //pennies
-	  if(!purse1.modify(0, 0, 0, delta))
-	    cout << endl << error_message << endl;
-	  break;
+         if(!purse1.modify(0, 0, 0, delta))
+            cout << endl << error_message << endl;
+          break;
         }
-	
+
         case 'c' : { //cents
-	  int cents = delta;
+          int cents = delta;
 
-	  // Get required no. of each coin type
-	  int quarters = cents / 25;
-	  cents %= 25;
+          // Get required no. of each coin type
+          int quarters = cents / 25;
+            cents %= 25;
+          int dimes = cents / 10;
+          cents %= 10;
+          int nickels = cents / 5;
+          cents %= 5;
+          int pennies = cents;
 
-	  int dimes = cents / 10;
-	  cents %= 10;
+          //Call a modify as we normally would
+         if(!purse1.modify(quarters, dimes, nickels, pennies))
+            cout << endl <<error_message << endl;
+         break;
+         }
 
-	  int nickels = cents / 5;
-	  cents %= 5;
-
-	  int pennies = cents;
-
-	  //Call a modify as we normally would
-	  if(!purse1.modify(quarters, dimes, nickels, pennies))
-	    cout << endl <<error_message << endl;
-	  break;
-	}
         default : {
-	  cout << "Invalid option.";
-	}
-      }
-    }
-  }
+          cout << "Invalid option.";
+        }
+      } //end of switch
+    } //end of if-else
+  } // end of menu
 
   // Step 12 EXTRA CREDIT) add c)ents option that allows the user to add a specific amount of cents
   
