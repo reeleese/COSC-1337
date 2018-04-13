@@ -22,6 +22,7 @@ class CoinPurse
     //    2nd:     set all coin counts to initial values; use parameters for: penny, nickel, dime, quarter
     //    please combine both of these into one constructor
     CoinPurse(int quarters=0, int dimes=0, int nickels=0, int pennies=0) {
+      
       // Step 6) avoid redundant code, call set() in constructor(s)
       set(quarters, dimes, nickels, pennies);
     }
@@ -159,7 +160,7 @@ int main() {
   return EXIT_SUCCESS; // Use return 0 if EXIT_SUCCESS is undefined
 }
 
-void get_input(int& option) {  
+  void get_input(int& option) {  
   while (!(cin >> option)) {
     cin.clear();
     cout << "Value must be an integer.";
@@ -168,6 +169,20 @@ void get_input(int& option) {
 }
 
 /*  Step 11) Paste test output here (do this after step 12 if doing extra credit)
-_
+COSC 1337 Exam 2 CoinPurse
+$1.41
+(q=8 d=7 n=6 p=5)
+$3.05 (q=8 d=7 n=6 p=5) Modify p)enny n)ickel d)ime q)uarter s)top: p -3
+$3.02 (q=8 d=7 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: n 0
+$3.02 (q=8 d=7 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: d 2
+$3.22 (q=8 d=9 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: q -4
+$2.22 (q=4 d=9 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: d -6
+$1.62 (q=4 d=3 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: n -4
+$1.42 (q=4 d=3 n=2 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: p -1
+$1.41 (q=4 d=3 n=2 p=1) Modify p)enny n)ickel d)ime q)uarter s)top: c 125
+$2.66 (q=9 d=3 n=2 p=1) Modify p)enny n)ickel d)ime q)uarter s)top: c 24
+$2.90 (q=9 d=5 n=2 p=5) Modify p)enny n)ickel d)ime q)uarter s)top: s
+
+Goodbye!
 */
 
