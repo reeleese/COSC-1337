@@ -53,9 +53,43 @@
   Step 8. (5 points)\
     In main, call set to change the values in purse1 to: 8 quarters, 7 dimes, 6 nickels, 5 pennies.\
     In main, Call show to display the contents of purse1 (number of each coin).\
-\
-  Step 9. (5 points)\
-    In class CoinPurse, write one modify() method that modifies coin counts\
-    using a positive (increment), negative (decrement) or zero (keep the same)\
-    value. For example:\
+\
+  Step 9. (5 points)\
+    In class CoinPurse, write one modify() method that modifies coin counts\
+    using a positive (increment), negative (decrement) or zero (keep the same)\
+    value. For example:\
+      purse1.modify(0, 0, 2, -3) This will: keep quarters, dimes the same;\
+      increase nickels by 2, and decrease pennies by 3.\
+    IMPORTANT! Do not allow coin counts to become less than zero! If ANY coin will\
+    become negative, don't make any changes.\
+    If the modify() succeeds, return true; if the modify() fails, return false\
+\
+  Step 10 (5 points)\
+    In main, write a menu driven loop that allows the user the add or remove coins from purse1.\
+    In a loop, display the total value, coins and options. Use s to stop (q is for quarter). For example:\
+      $3.05 (q=8 d=7 n=6 p=5) Modify p)enny n)ickel d)ime q)uarter s)top: p -3\
+      $3.02 (q=8 d=7 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: n 0\
+      $3.02 (q=8 d=7 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: d 2\
+      $3.12 (q=8 d=9 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: q -4\
+      $2.12 (q=4 d=9 n=6 p=2) Modify p)enny n)ickel d)ime q)uarter s)top: s\
+    Your user interface should look similar to example above.\
+    \
+    Important: Use if (cin >> x) checking so invalid numeric input does not cause crash or infinite loop.\
+         You can use get_input code developed earlier to provide one function for getting input. Required!\
+\
+  Step 11 (10 points)\
+    Test your code as described above in Step 10 and paste the output at the bottom.\
+\
+  Step 12 (5 points, EXTRA CREDIT)\
+    Add a new option c)ents that allows the user to add a specific amount of cents\
+    That is, instead of the user specifying a specific coin and count, the computer\
+    determines the coin counts, based on the cents to add. For example:\
+      $1.41 (q=4 d=3 n=2 p=1) Modify c)ents p)enny n)ickel d)ime q)uarter s)top: c 125\
+      $2.66 (q=9 d=3 n=2 p=1) Modify c)ents p)enny n)ickel d)ime q)uarter s)top: c 24\
+      $2.90 (q=9 d=5 n=2 p=5) Modify c)ents p)enny n)ickel d)ime q)uarter s)top: s\
+      \
+  When adding cents, add the fewest number of coins possible. That is, first add\
+  as many quarters as possible, then as many dimes as possible, then nickels and pennies.\
+  As a result, adding cents never adds more than 2 dimes, 1 nickel, or 4 pennies.\
+  If doing Step 12, do Step 11 (test and paste output at the bottom) LAST\
 }

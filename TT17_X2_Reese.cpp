@@ -15,42 +15,44 @@ class CoinPurse
 {
   private:
     int _quarters, _dimes, _nickels, _pennies;
+  
   public:
     CoinPurse(int quarters=0, int dimes=0, int nickels=0, int pennies=0) {
       set(quarters, dimes, nickels, pennies);
-  }
+    }
   
     int total_value() const {
-    return _quarters*25 + _dimes*10 + _nickels*5 + _pennies*1;
-  }
+      return _quarters*25 + _dimes*10 + _nickels*5 + _pennies*1;
+    }
   
-  bool set(int quarters, int dimes, int nickels, int pennies) {
-    // If any values are negative, do nothing
-    if (quarters < 0 || dimes < 0 || nickels < 0 || pennies < 0)
-      return false;
-
-    // Assign values iff given values are valid
-    _quarters = quarters;
-    _dimes = dimes;
-    _nickels = nickels;
-    _pennies = pennies;
-    return true;
-  }
+    bool set(int quarters, int dimes, int nickels, int pennies) {
+      // If any values are negative, do nothing
+      if (quarters < 0 || dimes < 0 || nickels < 0 || pennies < 0)
+        return false;
+      
+      // Assign values iff given values are valid
+      _quarters = quarters;
+      _dimes = dimes;
+      _nickels = nickels;
+      _pennies = pennies;
+      return true;
+    }
   
-  // Step 7) write show() method that outputs the number of each coin in the purse
-  //  in one string, like this: "q=4 d=3 n=2 p=1" (don't << endl;)
-  string show() const {
-    return "(q=" + to_string(_quarters) +
-           " d=" + to_string(_dimes) +
-           " n=" + to_string(_nickels) +
-	   " p=" + to_string(_pennies) + ")";
-  }
+    string show() const {
+      return "(q=" + to_string(_quarters) +
+             " d=" + to_string(_dimes) +
+             " n=" + to_string(_nickels) +
+             " p=" + to_string(_pennies) + ")";
+    }
 
-  // Step 9) write modify() method to modify coin counts using a positive (increment),
-  // negative (decrement) or zero (keep the same) value.
-  bool modify(int, int, int, int);
+  bool modify(int deltaQ, int deltaD, int deltaN, int deltaP) {
+    return set(_quarters + deltaQ, _dimes + deltaD,
+               _nickels + deltaN, _pennies + deltaP);
+  }
   
 };
+
+void get_input(int&);
 
 int main() {
   cout << "COSC 1337 Exam 2 CoinPurse" << endl;
@@ -58,14 +60,53 @@ int main() {
   // Step 2) declare CoinPurse object called purse1;
   // initialize with: 4 quarters, 3 dimes, 2 nickels, 1 penny
   CoinPurse purse1 = CoinPurse(4, 3, 2, 1);
-  cout << '$' << static_cast<double>(purse1.total_value())/100 << purse1.show();
+  cout << '$' << static_cast<double>(purse1.total_value())/100
+       << endl;
+  purse1.set(8, 7, 6, 5);
+  cout << purse1.show() << endl;
 
-  // Step 4) Call the total_value method on purse1; display the result formatted as: $x.xx
+  // Menu-Driven loop
+  bool done = false;
+  while(!done) {
+    // Display Menu and current sataus of purse1
+    cout << '$' << static_cast<double>(purse1.total_value())/100
+         << " " << purse1.show() << " "
+         << "Modify p)enny n)ickel d)ime q)uarter s)top: ";
 
-  // Step 8) Call set to change values in purse1 to: 8 quarters, 7 dimes, 6 nickels, 5 pennies.
-  //         Call show to display the contents of purse1
+    // Get user option
+    char choice = cin.get(); 
 
-  // Step 10) write menu driven loop that allows the user the add or remove coins from purse1.
+    // Only get modify values if user chooses not to quit
+    if (choice == 's')
+      done = true;
+    else {
+      // Get delta
+      cin.ignore(255, ' ');
+      int delta; get_input(delta);
+    
+      // Modify appropriate coins by delta
+      const string error_message = "You may not have fewer than 0 of any coin!";
+      switch (choice) {
+        case 'q' : if(!purse1.modify(delta, 0, 0, 0))
+	  cout << endl << error_message << endl;
+                   break;
+
+        case 'd' : if(!purse1.modify(0, delta, 0, 0))
+                     cout << endl << error_message << endl;
+                   break;
+
+        case 'n' : if(!purse1.modify(0, 0, delta, 0))
+                     cout << endl <<error_message << endl;
+                   break;
+
+        case 'p' : if(!purse1.modify(0, 0, 0, delta))
+                     cout << endl << error_message << endl;
+                   break;
+
+        default : cout << "Invalid option.";
+      }
+    }
+  }
 
   // Step 12 EXTRA CREDIT) add c)ents option that allows the user to add a specific amount of cents
   
@@ -73,6 +114,13 @@ int main() {
   return EXIT_SUCCESS; // Use return 0 if EXIT_SUCCESS is undefined
 }
 
+void get_input(int& option) {  
+  if (!(cin >> option)) {
+    cin.clear();
+    cout << "Value must be an integer.";
+  }
+  cin.ignore(255, '\n');
+}
 
 /*  Step 11) Paste test output here (do this after step 12 if doing extra credit)
 
