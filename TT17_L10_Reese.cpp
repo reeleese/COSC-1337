@@ -1,10 +1,10 @@
 /*
-  Author:
+  Author:          Lee Reese
   Assignment:      Lab 10
   Topic:           memory diagram with stack, heap structures
-  File Name:
+  File Name:       TT17_L10_Reese.cpp
   Course/Section:  COSC 1337
-  Due Date:        See syllabus or blackboard
+  Due Date:        Thursday 4/26
   Instructor:      Thayer
 */
 
