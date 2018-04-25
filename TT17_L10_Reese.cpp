@@ -40,12 +40,14 @@ wizard.name="Gandalf"; wizard.next=nullptr;
 For dynamically allocated instances, you can use arrow notation,
 such as: personList -> name="Harry".
 
-The keyword nullptr is the C++11/14 recommended way of setting a pointer to NULL or 0.
+The keyword nullptr is the C++11/14 recommended way of setting a pointer to 
+NULL or 0.
 
-To create variables on the heap, with no names, you have to use new to dynamically
-allocate the memory. See sample output (bottom page). IMPORTANT: Every new should
-be matched by a delete to prevent a memory leak! IMPORTANT: Make sure you delete
-all memory you dynamically allocate before leaving main(). Don't allow any memory
+To create variables on the heap, with no names, you have to use new to 
+dynamically allocate the memory. See sample output (bottom page). 
+IMPORTANT: Every new should be matched by a delete to prevent a memory leak! 
+IMPORTANT: Make sure you delete all memory you dynamically allocate before 
+leaving main(). Don't allow any memory
 leaks. Match all new with delete. When deleting an array, use delete [] array.
 
 After items are placed in memory, use cout statements to output the addresses
@@ -53,7 +55,8 @@ and values of all variables. Output the addresses of all variables
 (both pointer and named) in hexadecimal format, and output the contents (values)
 of all int, float, double and string variables.
 
-You cannot force the memory layout to be exactly in the order in the memory diagram.
+You cannot force the memory layout to be exactly in the order in the 
+memory diagram.
 As a programmer, you don't  control exactly WHERE in memory the compiler places
 variables. The important thing is for you to create the pointer variables,
 value variables, and set them up (nearly) as depicted in the memory diagram.
@@ -69,7 +72,8 @@ class Person {
     Person *next;    // pointer to the next person in the list
 };
 
-// Helpful macros to make it easier to output name, address, and value of a variable
+// Helpful macros to make it easier to output name, address, and value of
+// a variable
 // You may use these, or write your own function that does something similar
 #define show_addr_value(var, width) \
   cout<<"address of " <<setw(width)<<left<<#var<<" is: &"<<&var<<"  "     \
@@ -92,9 +96,11 @@ int main () {
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
   cout << "The contents of *p_amount is: " << (dec) << *p_amount << endl;
   cout << "After delete, the contents of p_amount is: " << p_amount << endl;
-  cout << "After reset to nullptr, the contents of p_amount is: " << p_amount << endl;
+  cout << "After reset to nullptr, the contents of p_amount is: " << p_amount
+       << endl;
   cout << "After delete [], the contents of pArray is: " << pArray << endl;
-  cout << "After reset to nullptr, the contents of pArray is: " << pArray << endl;
+  cout << "After reset to nullptr, the contents of pArray is: " << pArray 
+       << endl;
   cout<<"static (uses: Person wizard):\n";
   cout<<"dynamic (uses: personList, Person(\"Harry\"), Person(\"Sally\"):\n";
   cout << "  <follow link to next Person on personList>\n";
