@@ -131,6 +131,12 @@ int main () {
   show_addr_value(pArray[2], 8);
   delete [] pArray;
   pArray = nullptr;
+
+  Person* emptyList = nullptr;
+
+  Person wizard;
+  wizard.name = "Gandalf";
+  wizard.next = nullptr;
   
   /* Output comments, formats results, use as desired.
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
