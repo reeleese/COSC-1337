@@ -116,6 +116,9 @@ int main () {
   int *p_amount = nullptr;
   p_amount = new int;
   *p_amount = 1234;
+  show_addr_value(p_amount, 8);
+  cout << "The contents of *p_amount is: " << *p_size << endl;
+  cout << endl;
   
   /* Output comments, formats results, use as desired.
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
