@@ -125,18 +125,26 @@ int main () {
   int* pArray = nullptr;
   pArray = new int[3];
   pArray[0] = 11; pArray[1] = 22; pArray[2] = 33;
-  show_addr_value(pArray, 8);
-  show_addr_value(pArray[0], 8);
-  show_addr_value(pArray[1], 8);
-  show_addr_value(pArray[2], 8);
+  show_addr_value(pArray, 9);
+  show_addr_value(pArray[0], 9);
+  show_addr_value(pArray[1], 9);
+  show_addr_value(pArray[2], 9);
+  cout << "The contents of *pArray is: " << *pArray << endl;  
+  cout << endl;
   delete [] pArray;
   pArray = nullptr;
 
   Person* emptyList = nullptr;
+  show_addr_value(emptyList, 8);
+  cout << endl;
 
   Person wizard;
   wizard.name = "Gandalf";
   wizard.next = nullptr;
+  show_addr(wizard, 11);
+  show_addr_value(wizard.name, 11);
+  show_addr_value(wizard.next, 11);
+  cout << endl;
 
   Person* personList = nullptr;
   personList = new Person;
@@ -144,6 +152,8 @@ int main () {
   personList -> next = new Person;
   (personList + 1) -> name = "Sally";
   (personList + 1) -> next = nullptr;
+  delete personList;
+  personList = nullptr;
   
   /* Output comments, formats results, use as desired.
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
