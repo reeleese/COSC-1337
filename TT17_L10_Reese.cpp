@@ -119,6 +119,18 @@ int main () {
   show_addr_value(p_amount, 8);
   cout << "The contents of *p_amount is: " << *p_size << endl;
   cout << endl;
+  delete p_amount;
+  p_amount = nullptr;
+
+  int* pArray = nullptr;
+  pArray = new int[3];
+  pArray[0] = 11; pArray[1] = 22; pArray[2] = 33;
+  show_addr_value(pArray, 8);
+  show_addr_value(pArray[0], 8);
+  show_addr_value(pArray[1], 8);
+  show_addr_value(pArray[2], 8);
+  delete [] pArray;
+  pArray = nullptr;
   
   /* Output comments, formats results, use as desired.
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
