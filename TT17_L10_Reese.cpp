@@ -137,6 +137,13 @@ int main () {
   Person wizard;
   wizard.name = "Gandalf";
   wizard.next = nullptr;
+
+  Person* personList = nullptr;
+  personList = new Person;
+  personList -> name = "Harry";
+  personList -> next = new Person;
+  (personList + 1) -> name = "Sally";
+  (personList + 1) -> next = nullptr;
   
   /* Output comments, formats results, use as desired.
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
