@@ -69,7 +69,7 @@ using namespace std;
 class Person {
   public:
     string name;     // name of the person
-    Person *next;    // pointer to the next person in the list
+    Person *next;    // pointer to the next person in the list  
 };
 
 // Helpful macros to make it easier to output name, address, and value of
@@ -86,12 +86,37 @@ int main () {
   cout << "Output from Lab10 memory diagram on pointers:\n\n";
   
   float price = 0;
-  float *p_price = &price;
+  float* p_price = &price;
   *p_price = 19.95;
   show_addr_value(price, 8);
   show_addr_value(p_price, 8);
   cout << "The contents of *p_price is: " << *p_price << endl;
+  cout << endl;
+  
+  double PI = 0;
+  double* p_PI = &PI;
+  *p_PI = 3.141592;
+  show_addr_value(PI, 8);
+  show_addr_value(p_PI, 8);
+  cout << "The contents of *p_PI is: " << *p_PI << endl;
+  cout << endl;
 
+  double PI_div_2 = *p_PI / 2;
+  show_addr_value(PI_div_2, 8);
+  cout << endl;
+
+  int maxSize = 0;
+  int *p_size = &maxSize;
+  *p_size = 5028;
+  show_addr_value(maxSize, 8);
+  show_addr_value(p_size, 8);
+  cout << "The contents of *p_size is: " << *p_size << endl;
+  cout << endl;
+
+  int *p_amount = nullptr;
+  p_amount = new int;
+  *p_amount = 1234;
+  
   /* Output comments, formats results, use as desired.
   cout << "The contents of *p_PI is:    " << *p_PI << endl;
   cout << "The contents of *p_amount is: " << (dec) << *p_amount << endl;
