@@ -84,96 +84,122 @@ class Person {
 
 int main () {
   cout << "Output from Lab10 memory diagram on pointers:\n\n";
-  
-  float price = 0;
+
+  //----PRICE----//
+  // Initialize price using pointer p_price
+  float price{};
   float* p_price = &price;
   *p_price = 19.95;
+
+  // Price output
   show_addr_value(price, 8);
   show_addr_value(p_price, 8);
   cout << "The contents of *p_price is: " << *p_price << endl;
   cout << endl;
-  
+
+  //----PI & PI_DIV_2----//
+  // Initialize PI using point p_PI
   double PI = 0;
   double* p_PI = &PI;
   *p_PI = 3.141592;
+
+  // PI output
   show_addr_value(PI, 8);
   show_addr_value(p_PI, 8);
   cout << "The contents of *p_PI is: " << *p_PI << endl;
   cout << endl;
 
+  // Initialize PI_div_2
   double PI_div_2 = *p_PI / 2;
+
+  // Pi_div_2 output
   show_addr_value(PI_div_2, 8);
   cout << endl;
 
+  //----MAXSIZE & P_AMOUNT----//
+  // Initialize maxSize using pointer p_size
   int maxSize = 0;
   int *p_size = &maxSize;
   *p_size = 5028;
+
+  // maxSize output
   show_addr_value(maxSize, 8);
   show_addr_value(p_size, 8);
   cout << "The contents of *p_size is: " << *p_size << endl;
   cout << endl;
 
+  // Initialize p_amount and allocate memory on the heap
   int *p_amount = nullptr;
   p_amount = new int;
   *p_amount = 1234;
+
+  // p_amount output
   show_addr_value(p_amount, 8);
   cout << "The contents of *p_amount is: " << *p_size << endl;
   cout << endl;
+
+  // p_amount delete
   delete p_amount;
   p_amount = nullptr;
 
+  //----PARRAY----//
+  // Initialize pArray (+elements) and allocate memory on the heap
   int* pArray = nullptr;
   pArray = new int[3];
   pArray[0] = 11; pArray[1] = 22; pArray[2] = 33;
+
+  // pArray output (82 columns wide)
   show_addr_value(pArray, 9);
   show_addr_value(pArray[0], 9);
   show_addr_value(pArray[1], 9);
   show_addr_value(pArray[2], 9);
   cout << "The contents of *pArray is: " << *pArray << endl;  
   cout << endl;
+
+  // pArray delete
   delete [] pArray;
   pArray = nullptr;
 
+  //----EMPTYLIST----//
+  // emptyList + output
   Person* emptyList = nullptr;
   show_addr_value(emptyList, 8);
   cout << endl;
 
+  //----WIZARD----//
+  // Initialize wizard using dot notation
   Person wizard;
   wizard.name = "Gandalf";
   wizard.next = nullptr;
+
+  // wizard output
   show_addr(wizard, 11);
   show_addr_value(wizard.name, 11);
   show_addr_value(wizard.next, 11);
   cout << endl;
 
+  //----PERSONLIST----//
+  // Initialize personList head
   Person* personList = nullptr;
   personList = new Person;
   personList -> name = "Harry";
   personList -> next = new Person;
+
+  // Initialize second entry in personList
   (personList + 1) -> name = "Sally";
   (personList + 1) -> next = nullptr;
+
+  // personList output (108 columns wide)
   show_addr_value(personList, 22);
   show_addr_value(personList -> name, 22);
   show_addr_value(personList -> next, 22);
   show_addr_value((personList+1) -> name, 22);
   show_addr_value((personList+1) -> next, 22);
   cout << endl;
+
+  // personList delete
   delete personList;
   personList = nullptr;
-  
-  /* Output comments, formats results, use as desired.
-  cout << "The contents of *p_PI is:    " << *p_PI << endl;
-  cout << "The contents of *p_amount is: " << (dec) << *p_amount << endl;
-  cout << "After delete, the contents of p_amount is: " << p_amount << endl;
-  cout << "After reset to nullptr, the contents of p_amount is: " << p_amount
-       << endl;
-  cout << "After delete [], the contents of pArray is: " << pArray << endl;
-  cout << "After reset to nullptr, the contents of pArray is: " << pArray 
-       << endl;
-  cout<<"static (uses: Person wizard):\n";
-  cout<<"dynamic (uses: personList, Person(\"Harry\"), Person(\"Sally\"):\n";
-  cout << "  <follow link to next Person on personList>\n";
-  */
   
   return 0;
 } // end of main
