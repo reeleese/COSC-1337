@@ -152,6 +152,12 @@ int main () {
   personList -> next = new Person;
   (personList + 1) -> name = "Sally";
   (personList + 1) -> next = nullptr;
+  show_addr_value(personList, 22);
+  show_addr_value(personList -> name, 22);
+  show_addr_value(personList -> next, 22);
+  show_addr_value((personList+1) -> name, 22);
+  show_addr_value((personList+1) -> next, 22);
+  cout << endl;
   delete personList;
   personList = nullptr;
   
