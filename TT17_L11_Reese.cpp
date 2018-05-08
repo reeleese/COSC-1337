@@ -8,18 +8,29 @@
   Instructor:      Thayer
 */
 
+#include<iostream>
+
 using namespace std;
 
 class Day{
   private:
+    // Constants
+    
+
+    // Variables
     int _day;
-    enum _month {jan=31, feb=28, mar=31, apr=30, may=31, jun=30,
-                 jul=31, aug=31, sep=30, oct=31, nov=30, dec=31};
   
   public:
+    // Constants
+    const static int daysInYear = 365;
+    const static int year = 2018;
+  
     // Constructor
-    Day(int day = 0) {
-      if (day >= 0) _day = day;
+    Day(int day=0) {
+      // For nonexistant day, use 0 instead
+      if (day < 0 || day > daysInYear)
+        day = 0;
+      _day = day;
     }
 
     // Return day
@@ -27,8 +38,13 @@ class Day{
       return _day;
     }
 
+
 };
 
 int main() {
+  const static string monthsInYear[] = {"jan", "feb", "mar", "apr", "may", "jun",
+                                      "jul", "aug", "sep", "oct", "nov", "dec"};
+  const static int daysInMonth[] = {31, 28, 31, 30, 31, 30,
+                                  31, 31, 30, 31, 30, 31};
   return 0;
 }
