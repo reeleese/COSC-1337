@@ -71,37 +71,39 @@ class Day{
     Day operator--();
     Day operator--(int);
 };
-
+// Overloaded ++Day 
 Day Day::operator++() {
   _day++;
-  if (_day != 365)
+  if (_day != 365)  // don't let dec31 evaluate to jan0
     _day %= 365;
   return *this;
 }
 
+// Overloaded Day++
 Day Day::operator++(int) {
   Day temp = *this;
   _day++;
-  if (_day != 365)
+  if (_day != 365)  // don't let dec31 evaluate to jan0
     _day %= 365;
   return temp;
 }
 
+// Overloaded --Day
 Day Day::operator--() {
   _day--;
   _day %= 365;
-  if (_day == 0)
+  if (_day == 0)  // jan1 goes to dec31 instead of jan0
     _day = 365;
   return *this;
 }
 
+// Overloaded Day--
 Day Day::operator--(int) {
   Day temp = *this;
   _day--;
   _day %= 365;
-  if (_day == 0) {
+  if (_day == 0) // jan1 goes to dec31 instead of jan0
     _day = 365;
-  }
   return temp;
 }
 
