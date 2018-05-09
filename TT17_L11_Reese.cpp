@@ -73,16 +73,35 @@ class Day{
 };
 
 Day Day::operator++() {
-  int temp = _day;
-  temp++;
-  _day = temp % 365;
+  _day++;
+  if (_day != 365)
+    _day %= 365;
   return *this;
 }
 
 Day Day::operator++(int) {
   Day temp = *this;
   _day++;
+  if (_day != 365)
+    _day %= 365;
+  return temp;
+}
+
+Day Day::operator--() {
+  _day--;
   _day %= 365;
+  if (_day == 0)
+    _day = 365;
+  return *this;
+}
+
+Day Day::operator--(int) {
+  Day temp = *this;
+  _day--;
+  _day %= 365;
+  if (_day == 0) {
+    _day = 365;
+  }
   return temp;
 }
 
@@ -91,18 +110,7 @@ string Day::monthsOfYear[12] = {"jan", "feb", "mar", "apr",
                                 "sep", "oct", "nov", "dec"};
 int Day::daysInMonth[12] = {31, 28, 31, 30, 31, 30,
                             31, 31, 30, 31, 30, 31};
-int main() {/*
-  Day jan1  = Day(0, 1);
-  Day feb1  = Day(1, 1);
-  Day mar1  = Day(2, 1); 
-  Day dec31 = Day(11, 31); dec31;
-  cout << "jan1:  " << jan1.getMonth() << endl;
-  cout << "feb1:  " << feb1.getMonth() << endl;
-  cout << "mar1:  " << mar1.getMonth() << '/' << mar1.getDate() << endl;
-  cout << "dec31: " << dec31.getMonth() << '/' << dec31.getDate() << endl;*/
+int main() {
 
-  Day jan1 = Day(0, 1); jan1++;
-  cout << jan1.getDay() << endl; ++jan1;
-  cout << jan1.getDay() << endl;
   return 0;
 }
