@@ -57,7 +57,10 @@ string reverse_loop(string forward) { // looping
 string reverse_recurse(string forward) { // recursive
   // Constraints: No loops allowed; no static local or global variables.
   // Your new code goes here...
-  return ""; // replace this with your return value;  is "" until new code added.
+  if (forward.size() == 0)                        // base case
+    return "";                                    
+  string end = forward.substr(1, string::npos);   //end = first char
+  return reverse_recurse(end) + forward.front();
 }
 
 int add2_fx(int a, int b) { // functional (for illustration only)
@@ -78,7 +81,12 @@ int add2_recurse(int a, int b) { // recursive
   // You MAY use: ++ and/or -- (as done in add2_loop)
   // Constraints: No loops allowed; no static local or global variables.
   // Your new code goes here...
-  return 0; // replace this with your return value;  is 0 until new code added.
+  if (b == 0)                               // base case
+    return a;
+  if (b < 0)                                // Case: b is negative
+    return add2_recurse(a, ++b) -1;         // subtract 1 until base case
+                                            // Case: b is positive
+  return 1 + add2_recurse(a, --b);          // add1  until base case
 }
 
 int mult2_fx(int a, int b) { // functional (for illustration only)
@@ -99,7 +107,12 @@ int mult2_recurse(int a, int b) { // recursive
   // You MAY use: +, -, +=, -= operators (as done in mult2_loop)
   // Constraints: No loops allowed; no static local or global variables.
   // Your new code goes here...
-  return 0; // replace this with your return value;  is 0 until new code added.
+  if (b == 0)                            // base case
+    return 0;
+  if (b < 0)                             // Case: b is negative
+    return 0 - mult2_recurse(a, 0 -b);   // b to positive and negate result
+                                         // Case: b is positive
+  return a + mult2_recurse(a, --b);      // add a until base case
 }
 
 int search_loop(int array[], int size, int target) { // looping
@@ -108,10 +121,16 @@ int search_loop(int array[], int size, int target) { // looping
   return -1;
 }
 
+// WARNING: questionable scalability due to lazy implementation
 int search_recurse(int array[], int size, int target) { // recursive
   // Constraints: No loops allowed; no static local or global variables.
   // Your new code goes here...
-  return 0; // replace this with your return value;  is 0 until new code added.
+  if(size == 0)                                   // Case: target DNE
+    return -1;                                    // return "not found"
+  if (array[size-1] == target)                    // Case: target is at the end
+    return size-1;                                // return last index
+                                                  // Case: target not yet found
+  return search_recurse(array, size-1, target);   // check the 2nd to last index
 }
 
 enum control_t {functional, looping, recursive};
