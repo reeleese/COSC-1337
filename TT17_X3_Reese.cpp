@@ -38,7 +38,7 @@ vector<T> stuff {
 void show_stuff() { // verify that stuff contains the data as specified.
   cout<<"Contents of vector stuff, already loaded:\n";
   for (auto &t:stuff) { // If this does not compile, see the note below
-    cout<<setw(12)<<t.name<<setw(8)<<t.price<<setw(8)<<t.made_in<<setw(6)<<t.weight<<endl;
+    cout<<setw(12)<<right<<t.name<<setw(8)<<t.price<<setw(8)<<t.made_in<<setw(6)<<t.weight<<endl;
   }
   cout<<endl;
 }
@@ -55,26 +55,26 @@ void show_stuff() { // verify that stuff contains the data as specified.
 class Item {
   private:
     // 1A: member variables
-    string _name;
-    float _price;
+    string name;
+    float price;
   public:
     // 1C: Constructor
-    Item(string name, float price) {
-      if (name.size() < 1)
-        _name = "invalid";
-      if (price < 1)
-        _price = 1;
-      _name = name;
-      _price = price;
+    Item(string name= "item", float price= 1.00) {
+      if (name.size() < 1 || price < 1) {
+        name = "invalid";
+        price = 1;
+    }
+      this->name = name;
+      this->price = price;
     }
 
     // 1B: Display name and price
     void display() const {
-      cout << _name
-           << "$" << setprecision(2) << fixed << _price;
+      cout << setw(12) << right << name << " "
+           << "$ " << setprecision(2) << fixed << price;
    }
 };
-// 1D: Array of Items
+
 
 void step1() {
   cout<<"Step 1:\n";
@@ -83,12 +83,42 @@ void step1() {
   // stuff contains initial startup data.
   // Put testing code for step 1 here:
 
+  // 1D: Array of Items
+  const int size = stuff.size();
+  Item store[size];
+  for (int i = 0; i < size; i++)
+    store[i] = Item(stuff[i].name, stuff[i].price);
+
+  // 1E: Loop display
+  cout << "Contents of store, as loaded by student's new code:\n";
+  for (int i = 0; i < size; i++) {
+    store[i].display();
+    cout << '\n';
+  }
+  // END OF PART 1
+  cout << endl;
 }
 
 void step2() {
   cout<<"Step 2:\n";
   // Put all your code for step 2 here:
 
+  // 2A:
+  Item* part2 = new Item("black umbrella", 19.95);
+
+  // 2B:
+  cout << "umbrella is at address: " << part2 << endl;
+
+  // 2C:
+  part2->display();
+  cout << endl;
+
+  // 2D:
+  delete part2;
+  part2 = nullptr;
+
+  // END OF PART 2
+  cout << endl;
 }
 
 // Step 3: The initial code for class Fraction is provided.
@@ -111,23 +141,51 @@ class Fraction {
     }
     
     // Put new code for step 3 here:
+
+    // 3A;
+    Fraction operator++() {
+      this->numerator++;
+      return *this;
+    }
+
+    // 3B:
+    Fraction operator--() {
+      this->numerator--;
+      return *this;
+    }
+
+    // 3C:
+    Fraction operator*(Fraction arg) {
+      Fraction temp;
+      temp.numerator = numerator * arg.numerator;
+      temp.denominator = denominator * arg.denominator;
+      return temp;
+    }
 };
   
 void step3() {
   cout<<"Step 3:\n";
   // This is testing code for step 3.
-  // After you have implemented: operator++, operator--, and operator+,
+  // After you have implemented: operator++, operator--, and operator*,
   // Uncomment the code below. It should work.
-  // Fraction a=4; ++a; ++a; cout<<"a="<<a.get()<<endl;
+  Fraction a=4; ++a; ++a; cout<<"a="<<setprecision(0)<<a.get()<<endl;
   // test code, expect: 6, uncomment when ready
-  // Fraction b=5; --b; --b; cout<<"b="<<b.get()<<endl;
+     Fraction b=5; --b; --b; cout<<"b="<<b.get()<<endl;
   // test code, expect: 3, uncomment when ready
-  // Fraction c=6, d=7, e=c*d;
+     Fraction c=6, d=7, e=c*d;
   // test code, uncomment when ready
-  // cout<<"e="<<e.get()<<endl<<endl;
+     cout<<"e="<<e.get()<<endl<<endl;
   // test code, expect: 42, uncomment when ready
   // add code here to initialize Fraction evens[]
   // with 2 4 6 8 10 and display its contents
+
+  // 3D: 
+  Fraction evens[] = {2, 4, 6, 8, 10};
+  for (auto& x : evens)
+    cout << x.get() << " ";
+
+  // END OF STEP 3
+  cout << endl;
 };
 
 // The code below is for step 4, recursion
@@ -174,27 +232,29 @@ void double_arrow_iterative(int n) { // Provided, do not change
 // Put your new recursive versions for step 4 here...
 void line(int n) {
    // fill this in with recursive code for line
-
-
+  if (n > 1) line(n-1);
+  cout << '-';
 }
 
 void left_arrow(int n) {
-   // fill this in with recursive code for left_arrow
-
-
+  // fill this in with recursive code for left_arrow
+  if (n <= 0) cout << '<';
+  else {left_arrow(n-1); cout << '-';}
 }
 
 void right_arrow(int n) {
-   // fill this in with recursive code for right_arrow
-
-
+  // fill this in with recursive code for right_arrow
+  if (n > 0) {cout << '-'; right_arrow(n-1);}
+  else cout << '>';
+  
 }
 
-void double_arrow(int n) {
+void double_arrow(int n, bool head) {
   // This one is a challenge. Hint: add another parameter
   // fill this in with recursive code for double_arrow
-
-
+  if (head) cout << '<';
+  if (n > 0) {cout << '-'; double_arrow(n-1, false);}
+  else cout << '>';
 }
 
 void step4() {
@@ -215,17 +275,40 @@ void step4() {
     line(n); cout<<' ';
     left_arrow(n); cout<<' ';
     right_arrow(n); cout<<' ';
-    double_arrow(n); cout<<' '<<endl;
+    double_arrow(n, true); cout<<' '<<endl;
   }
+  cout << endl;
 };
 
 void step5() {
-  // 5 different ways to cause undefined behavior, and possibly crash a C++ program.
+  // 5 different ways to cause undefined behavior,
+  // and possibly crash a C++ program.
   // in main, step5() is commented out.
-  // To verify your bad code is really bad, test it by uncommenting step5() in main.
+  // To verify your bad code is really bad,
+  // test it by uncommenting step5() in main.
   cout<<"Step 5:\n";
   // Put all your code for step 5 here:
 
+  // Bad thing 1: Array access out-of-bounds
+  int evil[] = {666};
+  cout << "evil[1] = " << evil[1] << endl;;
+
+  // Bad thing 2: Dereference an allocation of size 0
+  int *satan = new int[0];
+  cout << "*satan = " << *satan << endl;
+  delete[] satan;
+
+  // Bad thing 3: using a pointer whose allocation has been deleted
+  cout << "*satan = " << *satan << endl;
+
+  // Bad thing 4: integer overflow
+  unsigned int x = 0;
+  x--;
+  cout << "Value of x: " << x << endl;
+
+  // Bed thing 5: doing arithmetic with a variable that has not been assigned
+  int i; i++;
+  cout << "i = " << i << endl;
 
 };
 
@@ -236,7 +319,7 @@ int main() {
   step2();
   step3();
   step4();
-  // step5(); // Extra credit: 5 ways to possibly crash a C++ program
+   step5(); // Extra credit: 5 ways to possibly crash a C++ program
   cout<<"\n...end.\n";
 	return 0;
 }
