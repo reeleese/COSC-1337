@@ -358,5 +358,56 @@ n= 5:
 
 
 /* Paste your test output here:
+Start...
+Step 1:
+Contents of vector stuff, already loaded:
+         hat       8   china     6
+     t-shirt      15     usa    14
+  coffee mug     6.5  canada    22
+   candy bar    0.79  mexico     3
+               34.59   japan   122
+ mixing bowl    4.99  brazil    20
 
+Contents of store, as loaded by student's new code:
+         hat $ 8.00
+     t-shirt $ 15.00
+  coffee mug $ 6.50
+     invalid $ 1.00
+     invalid $ 1.00
+ mixing bowl $ 4.99
+
+Step 2:
+umbrella is at address: 0x7ff674c028d0
+black umbrella $ 19.95
+
+Step 3:
+a=6
+b=3
+e=42
+
+2 4 6 8 10 
+
+Step 4:
+Test provided iterative versions of line, left_arrow, right_arrow, double_arrow:
+n= 1:- <- -> <->
+n= 2:-- <-- --> <-->
+n= 3:--- <--- ---> <--->
+n= 4:---- <---- ----> <---->
+n= 5:----- <----- -----> <----->
+
+Test student's new recursive versions of line, left_arrow, right_arrow, double_arrow:
+n= 1:- <- -> <-> 
+n= 2:-- <-- --> <--> 
+n= 3:--- <--- ---> <---> 
+n= 4:---- <---- ----> <----> 
+n= 5:----- <----- -----> <-----> 
+
+Step 5:
+evil[1] = 263025088
+*satan = 0
+*satan = 0
+Value of x: 4294967295
+i = -1213188511
+
+...end.
 */
